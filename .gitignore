@@ -1,0 +1,7 @@
+# Large video files that exceed GitHub's 100MB limit
+Case studies/AMARI RAAYA/Amari-Brand-Film.mp4
+Case studies/AMARI RAAYA/Amari-Brand-Film.tmp.mp4
+
+# Or ignore all large MP4 files (uncomment if needed)
+# *.mp4
+
