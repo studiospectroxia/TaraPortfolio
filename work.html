@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work - Tara Anand</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="work.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Helvetica+Now+Display:wght@400;500;700&family=Neue+Haas+Grotesk+Display+Pro:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <svg width="119" height="21" viewBox="0 0 119 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="16" font-family="Space Grotesk" font-weight="700" font-size="18" fill="white">TARA ANAND</text>
+                    </svg>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About Me</a>
+                    <a href="work.html" class="nav-link active">Work</a>
+                    <a href="gallery.html" class="nav-link">Photoshoot</a>
+                    <a href="social-media-grids.html" class="nav-link">Social Media Grids</a>
+                    <a href="index.html#contact" class="nav-link btn-contact">Contact</a>
+                </nav>
+                <button class="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu-overlay">
+                <div class="mobile-menu">
+                    <nav class="mobile-nav">
+                        <a href="index.html" class="mobile-nav-link">Home</a>
+                        <a href="about.html" class="mobile-nav-link">About Me</a>
+                        <a href="work.html" class="mobile-nav-link active">Work</a>
+                        <a href="gallery.html" class="mobile-nav-link">Photoshoot</a>
+                        <a href="social-media-grids.html" class="mobile-nav-link">Social Media Grids</a>
+                        <a href="index.html#contact" class="mobile-nav-link btn-contact">Contact</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Work Page Content -->
+    <section class="work-page">
+        <div class="container">
+            <!-- Back Button and Title Section -->
+            <div class="work-page-header">
+                <a href="index.html" class="back-button">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 22L10 14L18 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <div class="work-page-title-section">
+                    <h1 class="work-page-title">
+                        PROJECTS<span class="highlight-orange"> I HAVE WORKED ON</span>
+                    </h1>
+                    <p class="work-page-subtitle">Stories, campaigns, and brand worlds I've helped shape.</p>
+                    <div class="work-page-intro">
+                        <p class="work-page-intro-text">
+                            Over the past four years, I've partnered with brands across fashion, hospitality, FMCG, wellness, media, and culture — <span class="highlight-orange">building narratives, digital systems, and content experiences that create clarity and impact.</span>
+                        </p>
+                        <p class="work-page-intro-text-secondary">
+                            Here's a selection of the work I'm most proud of.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label class="filter-label">Industry</label>
+                    <div class="filter-buttons" id="industryFilters">
+                        <button class="filter-btn active" data-industry="all">All</button>
+                        <button class="filter-btn" data-industry="fmcg-wellness">FMCG / Wellness</button>
+                        <button class="filter-btn" data-industry="fashion">Fashion</button>
+                        <button class="filter-btn" data-industry="hospitality-fnb">Hospitality & F&B</button>
+                        <button class="filter-btn" data-industry="fnb">F&B</button>
+                        <button class="filter-btn" data-industry="fmcg">FMCG</button>
+                        <button class="filter-btn" data-industry="hospitality">Hospitality</button>
+                        <button class="filter-btn" data-industry="media-culture">Media and Culture</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Role</label>
+                    <div class="filter-buttons" id="roleFilters">
+                        <button class="filter-btn active" data-role="all">All</button>
+                        <button class="filter-btn" data-role="branding">Branding</button>
+                        <button class="filter-btn" data-role="campaigns">Campaigns</button>
+                        <button class="filter-btn" data-role="creative-direction">Creative Direction</button>
+                        <button class="filter-btn" data-role="brand-strategy">Brand Strategy</button>
+                        <button class="filter-btn" data-role="content-strategy">Content Strategy</button>
+                        <button class="filter-btn" data-role="social-media">Social Media</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project 1: SUPR -->
+                <a href="case-study-supr.html" class="project-card-link">
+                    <div class="project-card" data-industry="fmcg-wellness" data-role="brand-strategy,content-strategy,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/SUPR/SUPR-Web-Banner.jpg.webp" alt="SUPR Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FMCG / WELLNESS</div>
+                            <h3 class="project-card-title">SUPR - LAUNCHING A NEW AGE FASHION BRAND →</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2: Flying Machine -->
+                <a href="case-study-fm-orry.html" class="project-card-link">
+                    <div class="project-card" data-industry="fmcg-wellness" data-role="brand-strategy,content-strategy,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/Flying Machine x Orry/Hey Delhi, it's SHOWTIME! 🔥Orry is taking over DLF Mall of India today, September 28th at 4 PM!.mp4" alt="Flying Machine Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FMCG / WELLNESS</div>
+                            <h3 class="project-card-title">FLYING MACHINE- FM X ORRY - DESIGNED TO DISRUPT</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3: Shangri-La Burger & Lobster -->
+                <a href="case-study-shangri-la.html" class="project-card-link">
+                    <div class="project-card" data-industry="hospitality" data-role="brand-strategy,content-strategy,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/SHANGRILA_/01.-BL-Story-Set-2.png.webp" alt="Shangri-La Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">HOSPITALITY</div>
+                            <h3 class="project-card-title">SHANGRI - LA X BURGER & LOBSTER</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4: Suneet Verma -->
+                <a href="case-study-suneet-verma.html" class="project-card-link">
+                    <div class="project-card" data-industry="fashion" data-role="brand-strategy,content-strategy,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/SUNEET VARMA/Screenshot-2025-03-06-at-1.17.46 AM-min.png.webp" alt="Suneet Verma Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FASHION</div>
+                            <h3 class="project-card-title">SUNNET VERMA - Unveiling Nazm – A Tribute to Romance, Music & Theatre</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 5: Furlicks -->
+                <a href="case-study-furlicks.html" class="project-card-link">
+                    <div class="project-card" data-industry="fmcg-wellness" data-role="branding,brand-strategy,content-strategy,creative-direction">
+                        <div class="project-image">
+                            <img src="Case studies/FURLICKS/Furlicks-All-Product-Shots_result-scaled.jpg" alt="Furlicks Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FMCG-WELLNESS</div>
+                            <h3 class="project-card-title">FURLICKS - Only the best for our best friends.</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 6: The Boulevard -->
+                <a href="case-study-boulevard.html" class="project-card-link">
+                    <div class="project-card" data-industry="fnb" data-role="brand-strategy,content-strategy,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/The Boulevard/BLVD-WEBSITE-BANNER.jpg.webp" alt="The Boulevard Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FNB</div>
+                            <h3 class="project-card-title">THE BOULEVARD - #MeetMeAtTheBoulevard</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 7: Olive Bar & Kitchen -->
+                <a href="case-study-olive.html" class="project-card-link">
+                    <div class="project-card" data-industry="fnb" data-role="brand-strategy,content-strategy,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/OLIVE/Shaken, stirred, and served with a little Olive charm 🌿.mp4" alt="Olive Bar & Kitchen Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FNB</div>
+                            <h3 class="project-card-title">OLIVE BAR & KITCHEN - Old-world soul, new-age storytelling.</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 8: Sue Mue -->
+                <a href="case-study-sue-mue.html" class="project-card-link">
+                    <div class="project-card" data-industry="fashion" data-role="brand-strategy,content-strategy,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/SUE MUE/The handcrafted grandeur of Sue Mue's latest collection, Threads of Love, draws on the glorious .jpg" alt="Sue Mue Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FASHION</div>
+                            <h3 class="project-card-title">SUE MUE - Heritage Craft, Modern Expression</h3>
+                            <p class="project-card-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 9: Golden Grain -->
+                <a href="case-study-golden-grain.html" class="project-card-link">
+                    <div class="project-card" data-industry="fmcg" data-role="social-media,creative-direction,campaigns">
+                        <div class="project-image">
+                            <img src="Case studies/GOLDEN GRAIN/When the aroma draws a crowd and the flavors steal the spotlight — it's not just a meal, it's a .jpg" alt="Golden Grain Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FMCG</div>
+                            <h3 class="project-card-title">GOLDEN GRAIN - Elevating brand play with AI</h3>
+                            <p class="project-card-services">Social Media Management · Visual Strategy· Copywriting · Campaigns . Packaging</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 10: JOI -->
+                <a href="case-study-joi.html" class="project-card-link">
+                    <div class="project-card" data-industry="fmcg" data-role="social-media,branding">
+                        <div class="project-image">
+                            <img src="Case studies/JOI/Small-Cargo-Truck-Mockup.jpg" alt="JOI Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">FMCG - FOOD AND DRINK</div>
+                            <h3 class="project-card-title">JOI - From ordinary , to legen-dary</h3>
+                            <p class="project-card-services">Social media management. Brand identity</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 11: Blur The Border -->
+                <a href="case-study-blur-the-border.html" class="project-card-link">
+                    <div class="project-card" data-industry="media-culture" data-role="branding,social-media,creative-direction">
+                        <div class="project-image">
+                            <img src="Case studies/BLUR THE BORDER/Blur-The-Border-Website.jpg" alt="Blur The Border Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">MEDIA AND CULTURE</div>
+                            <h3 class="project-card-title">BLUR THE BORDER - thoughtful design & dynamic functionality.</h3>
+                            <p class="project-card-services">Brand identity. Social media management. Website design</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 12: Amari Raaya -->
+                <a href="case-study-amari-raaya.html" class="project-card-link">
+                    <div class="project-card" data-industry="hospitality" data-role="creative-direction,campaigns,social-media">
+                        <div class="project-image">
+                            <img src="Case studies/AMARI RAAYA/22DA0BCE-4E6F-4B7D-85D1-BE26FEBB1708.jpg" alt="Amari Raaya Project">
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-category">HOSPITALITY</div>
+                            <h3 class="project-card-title">AMARI RAAYA - Escapes are temporary, experiences are permanent.</h3>
+                            <p class="project-card-services">Film, photography, production, social media management</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="index.html" class="footer-nav-link">Home</a>
+                    <a href="about.html" class="footer-nav-link">About Me</a>
+                    <a href="work.html" class="footer-nav-link">Work</a>
+                    <a href="gallery.html" class="footer-nav-link">Photoshoot</a>
+                    <a href="social-media-grids.html" class="footer-nav-link">Social Media Grids</a>
+                    <a href="index.html#contact" class="footer-nav-link">Contact</a>
+                </nav>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/tara-anand" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/taraanand" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/taraanand" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:hello@taraanand.com" class="footer-social-link" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="footer-text">&copy; 2024 Tara Anand. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="work.js"></script>
+    <script src="work-images.js"></script>
+</body>
+</html>
+

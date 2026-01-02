@@ -1,0 +1,429 @@
+/* Social Media Grids Page Styles */
+
+.social-grids-page {
+    padding: var(--spacing-4xl) 0;
+    min-height: 100vh;
+}
+
+/* Header */
+.social-grids-header {
+    margin-bottom: var(--spacing-3xl);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.back-button:hover {
+    transform: translateX(-5px);
+}
+
+.back-button svg {
+    width: 28px;
+    height: 28px;
+}
+
+.social-grids-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: var(--font-size-6xl);
+    line-height: 1.017;
+    color: var(--color-white);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Phone Grid */
+.phone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 60px 40px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) 0;
+}
+
+/* Phone Wrapper */
+.phone-wrapper {
+    position: relative;
+    perspective: 1000px;
+    animation: fadeInUp 0.6s ease-out backwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Phone Frame */
+.phone-frame {
+    position: relative;
+    width: 280px;
+    height: 580px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+}
+
+.phone-frame:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(255, 106, 0, 0.3),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+/* Rotation variations */
+.phone-rotate-left .phone-frame {
+    transform: rotate(-3deg);
+}
+
+.phone-rotate-left .phone-frame:hover {
+    transform: rotate(-3deg) translateY(-10px) scale(1.02);
+}
+
+.phone-rotate-right .phone-frame {
+    transform: rotate(3deg);
+}
+
+.phone-rotate-right .phone-frame:hover {
+    transform: rotate(3deg) translateY(-10px) scale(1.02);
+}
+
+/* Phone Screen */
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Notch */
+.phone-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 25px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
+    z-index: 10;
+}
+
+/* Phone Content (Image) */
+.phone-content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.phone-frame:hover .phone-content {
+    transform: scale(1.05);
+}
+
+/* Phone Caption */
+.phone-caption {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-white);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 10001;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 10001;
+}
+
+.lightbox-prev {
+    left: 30px;
+}
+
+.lightbox-next {
+    right: 30px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev svg,
+.lightbox-next svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Instagram Button in Lightbox */
+.lightbox-instagram-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: var(--color-white);
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+    z-index: 10002;
+    margin-top: 20px;
+}
+
+.lightbox-instagram-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(225, 48, 108, 0.6);
+}
+
+.lightbox-instagram-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.lightbox-instagram-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .phone-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 50px 30px;
+    }
+    
+    .phone-frame {
+        width: 240px;
+        height: 500px;
+    }
+    
+    .social-grids-title {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 968px) {
+    .social-grids-page {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .social-grids-header {
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    .phone-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 40px 25px;
+    }
+    
+    .phone-frame {
+        width: 200px;
+        height: 420px;
+    }
+    
+    .social-grids-title {
+        font-size: 32px;
+    }
+    
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .lightbox-prev,
+    .lightbox-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .lightbox-prev {
+        left: 20px;
+    }
+    
+    .lightbox-next {
+        right: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .phone-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 30px 20px;
+    }
+    
+    .phone-frame {
+        width: 160px;
+        height: 340px;
+        padding: 8px;
+        border-radius: 28px;
+    }
+    
+    .phone-screen {
+        border-radius: 22px;
+    }
+    
+    .phone-screen::before {
+        width: 100px;
+        height: 18px;
+        border-radius: 0 0 14px 14px;
+    }
+    
+    .social-grids-title {
+        font-size: 28px;
+    }
+    
+    .social-grids-header {
+        gap: var(--spacing-md);
+    }
+    
+    .lightbox-image {
+        max-height: 75vh;
+    }
+    
+    .lightbox-instagram-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+        margin-top: 15px;
+    }
+    
+    .lightbox-instagram-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .phone-caption {
+        font-size: 12px;
+        margin-top: 15px;
+    }
+    
+    /* Remove rotations on mobile for better UX */
+    .phone-rotate-left .phone-frame,
+    .phone-rotate-right .phone-frame {
+        transform: none;
+    }
+    
+    .phone-rotate-left .phone-frame:hover,
+    .phone-rotate-right .phone-frame:hover {
+        transform: translateY(-10px) scale(1.02);
+    }
+}
+
+

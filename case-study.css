@@ -1,0 +1,636 @@
+/* Case Study Page Styles */
+
+.case-study {
+    padding: var(--spacing-4xl) 0;
+    min-height: 100vh;
+}
+
+/* Case Study Header */
+.case-study-header {
+    margin-bottom: var(--spacing-2xl);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.back-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateX(-5px);
+}
+
+.back-button svg {
+    width: 28px;
+    height: 28px;
+}
+
+.case-study-title-wrapper {
+    max-width: 1066px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.case-study-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: var(--font-size-6xl);
+    line-height: 1.017;
+    color: var(--color-white);
+    text-transform: uppercase;
+    margin: 0;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    letter-spacing: -0.02em;
+}
+
+.case-study-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-top: 0;
+    width: 100%;
+}
+
+.case-study-services {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: var(--font-size-xl);
+    color: #888;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: left;
+    flex: 1;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+}
+
+.case-study-category {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: var(--font-size-xl);
+    color: #888;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: right;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+}
+
+/* Hero Image */
+.case-study-hero {
+    width: 100%;
+    max-width: 1066px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.hero-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+/* Case Study Sections */
+.case-study-section {
+    margin-bottom: var(--spacing-3xl);
+    max-width: 1045px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overview-section {
+    max-width: 865px;
+}
+
+.execution-section-with-media {
+    max-width: 865px;
+}
+
+.section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    color: var(--color-white);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: -0.01em;
+}
+
+.section-content {
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+    font-weight: 400;
+    font-size: var(--font-size-2xl);
+    line-height: 1.6;
+    color: #b5b5b5;
+    margin: 0;
+}
+
+.overview-content {
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+    font-weight: 500;
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: #b5b5b5;
+}
+
+/* Divider */
+.case-study-divider {
+    height: 1px;
+    background-color: #343434;
+    margin: var(--spacing-2xl) auto;
+    width: 100%;
+    max-width: 1045px;
+}
+
+/* Execution Section */
+.execution-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.execution-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.execution-item {
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    line-height: 1.6;
+    color: #b5b5b5;
+    margin: 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.execution-item::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-orange);
+    font-size: 24px;
+    line-height: 1.6;
+}
+
+.execution-item strong {
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+.highlight-orange {
+    color: var(--color-accent);
+}
+
+.execution-conclusion {
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+    font-size: var(--font-size-2xl);
+    line-height: 1.6;
+    color: #b5b5b5;
+    margin: var(--spacing-md) 0 0 0;
+}
+
+/* Video Sections */
+.case-study-videos {
+    display: flex;
+    gap: 55px;
+    margin: 0 auto var(--spacing-3xl);
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+}
+
+.case-study-videos-single {
+    display: flex;
+    gap: 12px;
+    margin: 0 auto var(--spacing-3xl);
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+}
+
+.case-study-videos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin: 0 auto var(--spacing-3xl);
+    max-width: 865px;
+}
+
+.case-study-videos-three {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: var(--spacing-2xl) auto 0;
+    justify-items: center;
+    max-width: 1000px;
+}
+
+.case-study-videos-three .video-item-large:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
+.execution-section-with-media .case-study-videos-three {
+    max-width: 1000px;
+}
+
+.video-item {
+    width: 498px;
+    height: 885px;
+    flex: 0 0 auto;
+}
+
+.video-item-medium {
+    width: 100%;
+    height: 750px;
+    flex: 0 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-item-large {
+    width: 460px;
+    height: 819px;
+    flex: 0 0 auto;
+}
+
+.case-study-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #444;
+    color: #888;
+    font-family: 'Helvetica Now Display', sans-serif;
+    font-size: var(--font-size-sm);
+    text-align: center;
+    padding: var(--spacing-md);
+    transition: border-color 0.3s ease;
+}
+
+.video-placeholder:hover {
+    border-color: var(--color-orange);
+}
+
+.video-placeholder p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Social Media Grid */
+.social-grid-container {
+    display: flex;
+    gap: 19px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 900px;
+    width: 100%;
+}
+
+.social-grid-container img {
+    width: auto;
+    max-width: 453px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.social-grid-container img:first-child {
+    max-width: 453px;
+}
+
+.social-grid-container img:last-child {
+    max-width: 442px;
+}
+
+.social-grids-container {
+    display: flex;
+    gap: 19px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 900px;
+}
+
+.social-grid-item {
+    flex: 0 0 auto;
+}
+
+.social-grid-item:first-child {
+    width: 446px;
+}
+
+.social-grid-item:last-child {
+    width: 435px;
+}
+
+.social-grid-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.case-study-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-md);
+}
+
+/* Results Section */
+.results-section {
+    text-align: center;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 47px 134px;
+    margin: 47px auto;
+    max-width: 1207px;
+}
+
+@media (max-width: 1200px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.result-number {
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+    font-weight: 600;
+    font-size: var(--font-size-8xl);
+    color: var(--color-orange);
+    margin: 0 0 var(--spacing-md) 0;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.result-award {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--color-orange);
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.result-description {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: var(--font-size-lg);
+    color: var(--color-white);
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+}
+
+.results-conclusion {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    color: var(--color-orange);
+    text-transform: uppercase;
+    text-align: center;
+    margin: 47px auto 0;
+    max-width: 1207px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .case-study-title-wrapper {
+        max-width: 100%;
+    }
+    
+    .results-grid {
+        gap: 47px var(--spacing-2xl);
+    }
+}
+
+@media (max-width: 1200px) {
+    .case-study-title-wrapper {
+        max-width: 100%;
+    }
+    
+    .case-study-hero {
+        max-width: 100%;
+    }
+    
+    .case-study-title {
+        font-size: 38px;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+    
+    .case-study-videos {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .case-study-videos-single {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .case-study-videos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+    }
+    
+    .overview-section {
+        max-width: 100%;
+    }
+    
+    .execution-section-with-media {
+        max-width: 100%;
+    }
+    
+    .case-study-videos-three {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .video-item,
+    .video-item-medium,
+    .video-item-large {
+        width: 100%;
+        max-width: 523px;
+        height: auto;
+        aspect-ratio: 9 / 16;
+    }
+    
+    .social-grids-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .social-grid-item {
+        width: 100% !important;
+        max-width: 446px;
+    }
+}
+
+@media (max-width: 968px) {
+    .case-study {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .case-study-header {
+        padding-left: 0;
+    }
+    
+    .back-button {
+        position: relative;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .case-study-title-wrapper {
+        max-width: 100%;
+    }
+    
+    .case-study-title {
+        font-size: 32px;
+    }
+    
+    .section-content,
+    .execution-item,
+    .execution-conclusion {
+        font-size: var(--font-size-base);
+    }
+    
+    .result-number {
+        font-size: 60px;
+    }
+    
+    .result-award {
+        font-size: var(--font-size-xl);
+    }
+    
+    .results-conclusion {
+        font-size: var(--font-size-base);
+    }
+    
+    .case-study-hero,
+    .case-study-section,
+    .case-study-divider,
+    .case-study-videos,
+    .case-study-videos-single,
+    .social-grid-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .case-study-meta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+    
+    .case-study-category {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .case-study-title {
+        font-size: 28px;
+    }
+    
+    .case-study-services,
+    .case-study-category {
+        font-size: var(--font-size-base);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .section-content,
+    .execution-item,
+    .execution-conclusion {
+        font-size: var(--font-size-sm);
+    }
+    
+    .result-number {
+        font-size: 50px;
+    }
+    
+    .result-description {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 480px) {
+    .case-study-title {
+        font-size: 24px;
+    }
+    
+    .section-content,
+    .execution-item,
+    .execution-conclusion {
+        font-size: var(--font-size-sm);
+    }
+    
+    .result-number {
+        font-size: 40px;
+    }
+}
