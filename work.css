@@ -49,6 +49,10 @@
     letter-spacing: -0.02em;
 }
 
+.work-page-title .highlight-orange {
+    color: #ff6a00;
+}
+
 .work-page-subtitle {
     font-family: 'Helvetica Now Display', sans-serif;
     font-weight: 700;
