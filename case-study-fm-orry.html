@@ -63,15 +63,17 @@
                 <div class="case-study-title-wrapper">
                     <h1 class="case-study-title">FLYING MACHINE- FM X ORRY - DESIGNED TO DISRUPT</h1>
                     <div class="case-study-meta-row">
-                        <p class="case-study-services">Brand Strategy, Content Strategy, Social Media Launch</p>
+                        <p class="case-study-services">BRAND STRATEGY | CONTENT STRATEGY | SOCIAL MEDIA LAUNCH</p>
                         <p class="case-study-category">FMCG / WELLNESS</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Hero Image -->
+            <!-- Hero Video -->
             <div class="case-study-hero">
-                <img src="" alt="FM X ORRY Hero" class="hero-image" data-image="hero">
+                <video autoplay loop muted playsinline class="hero-video" preload="metadata">
+                    <source src="" type="video/mp4" data-video="hero">
+                </video>
             </div>
 
             <!-- Overview Section -->
@@ -135,14 +137,6 @@
                 </div>
             </div>
 
-            <!-- Social Media Grids Section -->
-            <div class="case-study-section">
-                <h2 class="section-title">SOCIAL MEDIA GRIDS-</h2>
-                <div class="social-grid-container">
-                    <img src="" alt="Social Media Grid" class="social-grid-image" data-image="social-grid">
-                </div>
-            </div>
-
             <!-- Results Section -->
             <div class="case-study-section results-section">
                 <h2 class="section-title">RESULTS-</h2>
@@ -164,6 +158,14 @@
                     The campaign didn't just elevate Flying Machine - it redefined its place in culture. The campaign proved that when strategy, creativity, and timing align, the result is a brand moment that truly lands.
                 </p>
             </div>
+
+            <!-- Social Media Grids Section -->
+            <div class="case-study-section">
+                <h2 class="section-title">SOCIAL MEDIA GRIDS-</h2>
+                <div class="social-grid-container">
+                    <img src="" alt="Social Media Grid" class="social-grid-image" data-image="social-grid">
+                </div>
+            </div>
         </div>
     </section>
 
@@ -176,7 +178,7 @@
             const basePath = 'Case studies/Flying Machine x Orry/';
             
             const files = {
-                hero: basePath + 'SOCIAL MEDIA GRID.jpg', // Using social grid as hero
+                videoHero: basePath + 'Can\u2019t get over this! Orry X Flying Machine turned up the heat and we\u2019re barely cooling down! 🔥 .mp4',
                 socialGrid: basePath + 'SOCIAL MEDIA GRID.jpg',
                 video1: basePath + 'If you felt the heat in Bangalore, it was definitely us! 🔥 @orry X @flyingmachine80 = 100_ DAMN.mp4',
                 video2: basePath + 'Can\u2019t get over this! Orry X Flying Machine turned up the heat and we\u2019re barely cooling down! 🔥 .mp4',
@@ -196,22 +198,21 @@
             // Set video sources
             const videoSources = document.querySelectorAll('source[data-video]');
             videoSources.forEach(source => {
-                const videoNum = source.getAttribute('data-video');
-                const fileKey = 'video' + videoNum;
+                const videoAttr = source.getAttribute('data-video');
+                let fileKey;
+                if (videoAttr === 'hero') {
+                    fileKey = 'videoHero';
+                } else {
+                    fileKey = 'video' + videoAttr;
+                }
                 if (files[fileKey]) {
                     const encodedPath = encodeFilePath(files[fileKey]);
                     source.src = encodedPath;
-                    console.log(`Video ${videoNum}: ${encodedPath}`);
+                    console.log(`Video ${videoAttr}: ${encodedPath}`);
                 }
             });
             
             // Set image sources
-            document.querySelectorAll('img[data-image="hero"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.hero);
-                img.src = encodedPath;
-                console.log(`Hero image: ${encodedPath}`);
-            });
-            
             document.querySelectorAll('img[data-image="social-grid"]').forEach(img => {
                 const encodedPath = encodeFilePath(files.socialGrid);
                 img.src = encodedPath;

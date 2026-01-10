@@ -318,6 +318,34 @@
     line-height: 1.5;
 }
 
+/* Hashtags Section */
+.hashtags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg) 0;
+}
+
+.hashtag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    color: var(--color-orange);
+    background: rgba(255, 106, 0, 0.1);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 106, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.hashtag:hover {
+    background: rgba(255, 106, 0, 0.2);
+    border-color: var(--color-orange);
+    transform: translateY(-2px);
+}
+
 /* Social Media Grid */
 .social-grid-container {
     display: flex;
@@ -617,6 +645,11 @@
     .result-description {
         font-size: var(--font-size-base);
     }
+    
+    .hashtag {
+        font-size: var(--font-size-base);
+        padding: 8px 16px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -632,5 +665,14 @@
     
     .result-number {
         font-size: 40px;
+    }
+    
+    .hashtags-container {
+        gap: var(--spacing-sm);
+    }
+    
+    .hashtag {
+        font-size: var(--font-size-sm);
+        padding: 6px 12px;
     }
 }
