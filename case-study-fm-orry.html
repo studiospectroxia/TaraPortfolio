@@ -178,7 +178,7 @@
             const basePath = 'Case studies/Flying Machine x Orry/';
             
             const files = {
-                videoHero: basePath + 'Can\u2019t get over this! Orry X Flying Machine turned up the heat and we\u2019re barely cooling down! 🔥 .mp4',
+                videoHero: basePath + 'Hey Delhi, it’s SHOWTIME! 🔥Orry is taking over DLF Mall of India today, September 28th at 4 PM!.mp4',
                 socialGrid: basePath + 'SOCIAL MEDIA GRID.jpg',
                 video1: basePath + 'If you felt the heat in Bangalore, it was definitely us! 🔥 @orry X @flyingmachine80 = 100_ DAMN.mp4',
                 video2: basePath + 'Can\u2019t get over this! Orry X Flying Machine turned up the heat and we\u2019re barely cooling down! 🔥 .mp4',
@@ -209,6 +209,15 @@
                     const encodedPath = encodeFilePath(files[fileKey]);
                     source.src = encodedPath;
                     console.log(`Video ${videoAttr}: ${encodedPath}`);
+                    
+                    // Reload the video element after setting source
+                    const video = source.closest('video');
+                    if (video && videoAttr === 'hero') {
+                        video.load();
+                        video.play().catch(e => {
+                            console.log('Hero video autoplay prevented:', e);
+                        });
+                    }
                 }
             });
             
@@ -219,10 +228,13 @@
                 console.log(`Social grid: ${encodedPath}`);
             });
             
-            // Reload videos
+            // Reload videos including hero video
             setTimeout(() => {
-                document.querySelectorAll('.case-study-video').forEach(video => {
+                document.querySelectorAll('.case-study-video, .hero-video').forEach(video => {
                     video.load();
+                    video.play().catch(e => {
+                        console.log('Video autoplay prevented:', e);
+                    });
                 });
             }, 300);
         });

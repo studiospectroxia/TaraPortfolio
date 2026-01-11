@@ -65,7 +65,22 @@
 
             <!-- Phone Grid -->
             <div class="phone-grid" id="phoneGrid">
-                <!-- Phone mockups will be dynamically loaded here -->
+                <!-- Brand groups will be dynamically loaded here -->
+            </div>
+            
+            <!-- Brand Expansion Modal -->
+            <div class="brand-expansion-modal" id="brandExpansionModal">
+                <div class="brand-expansion-content">
+                    <button class="brand-expansion-close" id="brandExpansionClose" aria-label="Close">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 8L8 24M8 8L24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <h2 class="brand-expansion-title" id="brandExpansionTitle"></h2>
+                    <div class="brand-expansion-grid" id="brandExpansionGrid">
+                        <!-- Expanded images will be loaded here -->
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -169,20 +184,35 @@
                 return instagramLinks[brandName] || null;
             }
             
-            // Create phone mockup elements
+            // Group images by brand
+            const brandGroups = {};
             imageFiles.forEach((filename, index) => {
-                const phoneWrapper = document.createElement('div');
-                phoneWrapper.className = 'phone-wrapper';
+                const brandName = getBrandName(filename);
+                if (!brandGroups[brandName]) {
+                    brandGroups[brandName] = [];
+                }
+                brandGroups[brandName].push({ filename, index });
+            });
+            
+            // Create brand cards (one per brand)
+            let brandIndex = 0;
+            Object.keys(brandGroups).forEach((brandName) => {
+                const brandImages = brandGroups[brandName];
+                const firstImage = brandImages[0];
                 
-                // Add rotation classes for interesting layout (every 3rd, 5th, 7th phone gets different rotation)
-                if (index % 7 === 0) {
+                const phoneWrapper = document.createElement('div');
+                phoneWrapper.className = 'phone-wrapper brand-card';
+                phoneWrapper.dataset.brand = brandName;
+                
+                // Add rotation classes for interesting layout
+                if (brandIndex % 7 === 0) {
                     phoneWrapper.classList.add('phone-rotate-left');
-                } else if (index % 5 === 0) {
+                } else if (brandIndex % 5 === 0) {
                     phoneWrapper.classList.add('phone-rotate-right');
                 }
                 
                 // Add stagger delay for animation
-                phoneWrapper.style.animationDelay = `${index * 0.1}s`;
+                phoneWrapper.style.animationDelay = `${brandIndex * 0.1}s`;
                 
                 const phoneFrame = document.createElement('div');
                 phoneFrame.className = 'phone-frame';
@@ -191,35 +221,122 @@
                 phoneScreen.className = 'phone-screen';
                 
                 const img = document.createElement('img');
-                const encodedPath = encodeFilePath(basePath + filename);
+                const encodedPath = encodeFilePath(basePath + firstImage.filename);
                 img.src = encodedPath;
-                img.alt = filename.replace('.jpg', '').replace(/[()]/g, ' ');
+                img.alt = brandName;
                 img.className = 'phone-content';
                 img.loading = 'lazy';
-                img.dataset.index = index;
-                img.dataset.src = encodedPath;
                 
                 // Handle image load errors
                 img.onerror = function() {
                     console.warn(`Failed to load image: ${encodedPath}`);
                 };
                 
-                // Add click handler for lightbox
-                phoneFrame.addEventListener('click', function() {
-                    openLightbox(index, imageFiles, basePath);
-                });
-                
                 phoneScreen.appendChild(img);
                 phoneFrame.appendChild(phoneScreen);
                 phoneWrapper.appendChild(phoneFrame);
                 
-                // Create caption element
+                // Create caption element with count badge
+                const captionContainer = document.createElement('div');
+                captionContainer.className = 'phone-caption-container';
+                
                 const caption = document.createElement('div');
                 caption.className = 'phone-caption';
-                caption.textContent = getBrandName(filename);
-                phoneWrapper.appendChild(caption);
+                caption.textContent = brandName;
+                
+                // Add count badge if more than one image
+                if (brandImages.length > 1) {
+                    const countBadge = document.createElement('div');
+                    countBadge.className = 'brand-count-badge';
+                    countBadge.textContent = `+${brandImages.length - 1}`;
+                    captionContainer.appendChild(countBadge);
+                }
+                
+                captionContainer.appendChild(caption);
+                phoneWrapper.appendChild(captionContainer);
+                
+                // Add click handler to open brand expansion modal
+                phoneWrapper.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on badge
+                    if (e.target.classList.contains('brand-count-badge')) return;
+                    openBrandExpansion(brandName, brandImages);
+                });
                 
                 phoneGrid.appendChild(phoneWrapper);
+                brandIndex++;
+            });
+            
+            // Brand Expansion Modal functionality
+            function openBrandExpansion(brandName, brandImages) {
+                const modal = document.getElementById('brandExpansionModal');
+                const title = document.getElementById('brandExpansionTitle');
+                const grid = document.getElementById('brandExpansionGrid');
+                
+                title.textContent = brandName;
+                grid.innerHTML = '';
+                
+                // Create grid items for all brand images
+                brandImages.forEach((imageData, index) => {
+                    const gridItem = document.createElement('div');
+                    gridItem.className = 'brand-expansion-item';
+                    
+                    const phoneWrapper = document.createElement('div');
+                    phoneWrapper.className = 'phone-wrapper';
+                    
+                    const phoneFrame = document.createElement('div');
+                    phoneFrame.className = 'phone-frame';
+                    
+                    const phoneScreen = document.createElement('div');
+                    phoneScreen.className = 'phone-screen';
+                    
+                    const img = document.createElement('img');
+                    const encodedPath = encodeFilePath(basePath + imageData.filename);
+                    img.src = encodedPath;
+                    img.alt = brandName;
+                    img.className = 'phone-content';
+                    img.loading = 'lazy';
+                    
+                    // Click to open in lightbox
+                    phoneFrame.addEventListener('click', function() {
+                        // Find all images for this brand in the full list
+                        const allBrandImages = brandGroups[brandName].map(item => item.filename);
+                        const imageIndex = imageFiles.indexOf(imageData.filename);
+                        openLightbox(imageIndex, imageFiles, basePath);
+                    });
+                    
+                    phoneScreen.appendChild(img);
+                    phoneFrame.appendChild(phoneScreen);
+                    phoneWrapper.appendChild(phoneFrame);
+                    gridItem.appendChild(phoneWrapper);
+                    grid.appendChild(gridItem);
+                });
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeBrandExpansion() {
+                const modal = document.getElementById('brandExpansionModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // Brand expansion modal event listeners
+            document.getElementById('brandExpansionClose').addEventListener('click', closeBrandExpansion);
+            document.getElementById('brandExpansionModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeBrandExpansion();
+                }
+            });
+            
+            // Keyboard navigation for brand expansion
+            document.addEventListener('keydown', function(e) {
+                const modal = document.getElementById('brandExpansionModal');
+                if (!modal.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeBrandExpansion();
+                }
             });
             
             // Lightbox functionality
@@ -314,9 +431,6 @@
                     showPrevImage();
                 }
             });
-            
-            // Make openLightbox available globally
-            window.openLightbox = openLightbox;
         });
     </script>
 
