@@ -44,6 +44,23 @@
     margin: 0;
 }
 
+/* Gallery Credit */
+.gallery-credit {
+    margin-top: var(--spacing-3xl);
+    text-align: center;
+    padding-top: var(--spacing-2xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gallery-credit-text {
+    font-family: 'Helvetica Now Display', sans-serif;
+    font-weight: 400;
+    font-size: var(--font-size-base);
+    color: var(--color-white);
+    margin: 0;
+    line-height: 1.6;
+}
+
 /* Gallery Grid - Dynamic Masonry Layout */
 .gallery-grid {
     display: grid;

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Decks - Tara Anand</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pitch-decks.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Helvetica+Now+Display:wght@400;500;700&family=Neue+Haas+Grotesk+Display+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PDF.js library for rendering PDF thumbnails -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <svg width="119" height="21" viewBox="0 0 119 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="16" font-family="Space Grotesk" font-weight="700" font-size="18" fill="white">TARA ANAND</text>
+                    </svg>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About Me</a>
+                    <a href="work.html" class="nav-link">Work</a>
+                    <a href="gallery.html" class="nav-link">Photoshoot</a>
+                    <a href="social-media-grids.html" class="nav-link">Social Media Grids</a>
+                    <a href="pitch-decks.html" class="nav-link active">Pitch Decks</a>
+                    <a href="index.html#contact" class="nav-link btn-contact">Contact</a>
+                </nav>
+                <button class="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu-overlay">
+                <div class="mobile-menu">
+                    <nav class="mobile-nav">
+                        <a href="index.html" class="mobile-nav-link">Home</a>
+                        <a href="about.html" class="mobile-nav-link">About Me</a>
+                        <a href="work.html" class="mobile-nav-link">Work</a>
+                        <a href="gallery.html" class="mobile-nav-link">Photoshoot</a>
+                        <a href="social-media-grids.html" class="mobile-nav-link">Social Media Grids</a>
+                        <a href="pitch-decks.html" class="mobile-nav-link active">Pitch Decks</a>
+                        <a href="index.html#contact" class="mobile-nav-link btn-contact">Contact</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pitch Decks Page Content -->
+    <section class="pitch-decks-page">
+        <div class="container">
+            <!-- Back Button and Title Section -->
+            <div class="pitch-decks-header">
+                <a href="index.html" class="back-button">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 22L10 14L18 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <h1 class="pitch-decks-title">PITCH DECKS</h1>
+            </div>
+
+            <!-- Pitch Decks Grid -->
+            <div class="pitch-decks-grid" id="pitchDecksGrid">
+                <!-- PDF cards will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Load pitch deck PDFs from Pitch Decks folder
+        document.addEventListener('DOMContentLoaded', function() {
+            const pitchDecksGrid = document.getElementById('pitchDecksGrid');
+            const basePath = 'Pitch Decks/';
+            
+            // List of PDF files
+            const pdfFiles = [
+                'AMARI X AGENC (1).pdf',
+                'Boulevard Pitch Deck.pdf',
+                'FCUK  Yearly Plan.pdf',
+                'KANIRY  SOCIAL MEDIA PITCH.pdf',
+                'Kibba Pitch Deck.pdf',
+                'L_Opera Social Media Pitch.pdf',
+                'Laneige Social Media Pitch.pdf',
+                'Mestizo Cantina - Pitch Deck.pdf',
+                'No Names _ Communications Plan-2.pdf',
+                'OBEROI  RESEARCH 3.pdf',
+                'Radisson Hotel  Social Media Pitch.pdf',
+                'Royal China.pdf',
+                'Shangri-La Eros New Delhi Social Media Pitch.pdf',
+                'Social Media Pitch-2.pdf',
+                'Social Media Pitch-3.pdf',
+                'Sulwhasoo Social Media Pitch.pdf',
+                'Supr Water - Strat.pdf',
+                'The Leela Palace New Delhi  Social Media Pitch.pdf',
+                'The Library Bar  Pitch Deck.pdf'
+            ];
+            
+            // Function to properly encode file paths for URLs
+            function encodeFilePath(path) {
+                path = path.replace(/\\/g, '/');
+                return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+            }
+            
+            // Function to clean up PDF filename for display
+            function cleanFileName(filename) {
+                // Remove .pdf extension
+                let name = filename.replace('.pdf', '');
+                // Remove numbers in parentheses like (1), (2), etc.
+                name = name.replace(/\s*\(\d+\)/g, '');
+                // Remove trailing numbers like -2, -3
+                name = name.replace(/\s*-\d+$/g, '');
+                // Replace underscores with spaces
+                name = name.replace(/_/g, ' ');
+                // Clean up multiple spaces
+                name = name.replace(/\s+/g, ' ').trim();
+                return name;
+            }
+            
+            // Set up PDF.js worker
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            
+            // Function to render first page of PDF as thumbnail
+            async function renderPDFThumbnail(pdfPath, canvasElement) {
+                try {
+                    const loadingSpinner = canvasElement.parentElement.querySelector('.pitch-deck-loading');
+                    if (loadingSpinner) loadingSpinner.style.display = 'flex';
+                    
+                    const pdf = await pdfjsLib.getDocument(pdfPath).promise;
+                    const page = await pdf.getPage(1); // Get first page
+                    
+                    const viewport = page.getViewport({ scale: 1.5 });
+                    const canvas = canvasElement;
+                    const context = canvas.getContext('2d');
+                    
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    await page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    }).promise;
+                    
+                    if (loadingSpinner) loadingSpinner.style.display = 'none';
+                    canvas.style.display = 'block';
+                } catch (error) {
+                    console.error('Error rendering PDF thumbnail:', error);
+                    const loadingSpinner = canvasElement.parentElement.querySelector('.pitch-deck-loading');
+                    if (loadingSpinner) loadingSpinner.style.display = 'none';
+                    // Show fallback icon if PDF fails to load
+                    canvasElement.style.display = 'none';
+                    const fallbackIcon = canvasElement.parentElement.querySelector('.pitch-deck-fallback');
+                    if (fallbackIcon) fallbackIcon.style.display = 'flex';
+                }
+            }
+            
+            // Create PDF card elements
+            pdfFiles.forEach((filename, index) => {
+                const card = document.createElement('div');
+                card.className = 'pitch-deck-card';
+                
+                const cardContent = document.createElement('div');
+                cardContent.className = 'pitch-deck-card-content';
+                
+                // Cover Image Container
+                const coverContainer = document.createElement('div');
+                coverContainer.className = 'pitch-deck-cover-container';
+                
+                // Loading Spinner
+                const loadingSpinner = document.createElement('div');
+                loadingSpinner.className = 'pitch-deck-loading';
+                loadingSpinner.innerHTML = `
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-opacity="0.3"/>
+                        <path d="M12 2C13.3132 2 14.6136 2.25866 15.8268 2.7612C17.0401 3.26375 18.1425 4.00035 19.0711 4.92893C19.9997 5.85752 20.7362 6.95991 21.2388 8.17317C21.7413 9.38642 22 10.6868 22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                `;
+                
+                // Canvas for PDF thumbnail
+                const canvas = document.createElement('canvas');
+                canvas.className = 'pitch-deck-cover-image';
+                canvas.style.display = 'none';
+                
+                // Fallback icon (shown if PDF fails to load)
+                const fallbackIcon = document.createElement('div');
+                fallbackIcon.className = 'pitch-deck-fallback';
+                fallbackIcon.style.display = 'none';
+                fallbackIcon.innerHTML = `
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 9H9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                `;
+                
+                coverContainer.appendChild(loadingSpinner);
+                coverContainer.appendChild(canvas);
+                coverContainer.appendChild(fallbackIcon);
+                
+                // PDF Title
+                const title = document.createElement('h3');
+                title.className = 'pitch-deck-title';
+                title.textContent = cleanFileName(filename);
+                
+                // Download Button
+                const downloadBtn = document.createElement('a');
+                downloadBtn.href = encodeFilePath(basePath + filename);
+                downloadBtn.download = filename;
+                downloadBtn.target = '_blank';
+                downloadBtn.rel = 'noopener noreferrer';
+                downloadBtn.className = 'pitch-deck-download-btn';
+                downloadBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>View PDF</span>
+                `;
+                
+                cardContent.appendChild(coverContainer);
+                cardContent.appendChild(title);
+                cardContent.appendChild(downloadBtn);
+                card.appendChild(cardContent);
+                
+                pitchDecksGrid.appendChild(card);
+                
+                // Load PDF thumbnail asynchronously
+                const pdfPath = encodeFilePath(basePath + filename);
+                renderPDFThumbnail(pdfPath, canvas);
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="index.html" class="footer-nav-link">Home</a>
+                    <a href="about.html" class="footer-nav-link">About Me</a>
+                    <a href="work.html" class="footer-nav-link">Work</a>
+                    <a href="gallery.html" class="footer-nav-link">Photoshoot</a>
+                    <a href="social-media-grids.html" class="footer-nav-link">Social Media Grids</a>
+                    <a href="pitch-decks.html" class="footer-nav-link">Pitch Decks</a>
+                    <a href="index.html#contact" class="footer-nav-link">Contact</a>
+                </nav>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/tara-anand" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/taraanand" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:taraanand99@gmail.com" class="footer-social-link" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="footer-text">&copy; 2024 Tara Anand. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

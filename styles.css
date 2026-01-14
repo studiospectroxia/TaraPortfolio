@@ -706,7 +706,6 @@ html {
     align-items: center;
     justify-content: center;
     padding: var(--spacing-md);
-    filter: brightness(0) invert(1);
     opacity: 0.8;
     transition: opacity 0.3s ease;
 }
@@ -730,7 +729,14 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: grayscale(100%);
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+/* Override brand-logo filter when used with brands-logo-container */
+.brand-logo.brands-logo-container {
+    filter: none !important;
+    -webkit-filter: none !important;
 }
 
 .brands-logo-image {
@@ -740,13 +746,13 @@ html {
     min-height: 720px;
     object-fit: contain;
     opacity: 0.9;
-    transition: opacity 0.3s ease, filter 0.3s ease;
-    filter: grayscale(100%);
+    transition: opacity 0.3s ease;
+    filter: none !important;
+    -webkit-filter: none !important;
 }
 
 .brands-logo-container:hover .brands-logo-image {
     opacity: 1;
-    filter: grayscale(80%);
 }
 
 /* Services Section */
@@ -938,10 +944,17 @@ html {
 
 .project-image {
     width: 100%;
+    max-width: 800px;
     border-radius: 22px;
     overflow: hidden;
     position: relative;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Homepage work section - reduce image height */
+.work .project-image {
+    aspect-ratio: 21 / 9;
+    max-width: 100%;
 }
 
 .project-image::after {
@@ -969,6 +982,16 @@ html {
     height: auto;
     display: block;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 500px;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Homepage work section - images fill container with aspect ratio */
+.work .project-image img {
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
 }
 
 .project-item:hover .project-image img {
@@ -1022,7 +1045,7 @@ html {
 .project-description {
     font-family: 'Helvetica Now Display', sans-serif;
     font-weight: 500;
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-base);
     color: #b5b5b5;
     line-height: 1.6;
 }
@@ -1044,10 +1067,10 @@ html {
 }
 
 .testimonials-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
-    max-width: 947px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1058,10 +1081,11 @@ html {
     padding: 24px 26px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+    min-height: 380px;
 }
 
 .testimonial-card::before {
@@ -1088,50 +1112,60 @@ html {
 .testimonial-quote {
     font-family: 'Helvetica Now Display', sans-serif;
     font-weight: 700;
-    font-size: var(--font-size-2xl);
+    font-size: 24px;
     color: var(--color-white);
-    line-height: 1.4;
+    line-height: 1.3;
+    flex-grow: 0;
+    margin-bottom: 8px;
 }
 
 .testimonial-text {
     font-family: 'Helvetica Now Display', sans-serif;
-    font-weight: 500;
-    font-size: 17px;
+    font-weight: 400;
+    font-size: 16px;
     color: var(--color-text-gray);
-    line-height: 1.6;
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 4px;
 }
 
 .testimonial-author {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
+    margin-top: 8px;
 }
 
 .author-name {
-    font-family: 'Helvetica Now Display', sans-serif;
-    font-weight: 700;
-    font-size: var(--font-size-xl);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
     color: var(--color-white);
+    letter-spacing: -0.01em;
 }
 
 .author-role {
     font-family: 'Helvetica Now Display', sans-serif;
-    font-weight: 700;
-    font-size: var(--font-size-xl);
+    font-weight: 500;
+    font-size: 15px;
     color: var(--color-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-testimonial {
-    align-self: flex-end;
+    align-self: flex-start;
     background-color: var(--color-orange);
     color: var(--color-white);
-    padding: 17px 25px;
+    padding: 14px 22px;
     border-radius: 25px;
     text-decoration: none;
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 500;
-    font-size: var(--font-size-xl);
+    font-size: 16px;
     transition: all 0.3s ease;
+    margin-top: auto;
+    white-space: nowrap;
 }
 
 .btn-testimonial:hover {
@@ -1209,6 +1243,60 @@ html {
     color: var(--color-white);
     margin-bottom: var(--spacing-lg);
     letter-spacing: -0.01em;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.contact-link-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 18px 24px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: var(--color-white);
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: var(--font-size-lg);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.contact-link-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.contact-link-btn svg:first-child {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.contact-link-btn span {
+    flex: 1;
+}
+
+.contact-link-btn svg:last-child {
+    width: 9px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.contact-email:hover {
+    color: var(--color-white);
+}
+
+.contact-whatsapp:hover {
+    color: #25D366;
 }
 
 .contact-form {
@@ -1401,10 +1489,31 @@ html {
     }
 }
 
+@media (max-width: 1024px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .testimonial-card {
+        min-height: 400px;
+    }
+}
+
 @media (max-width: 968px) {
     .hero-content {
         flex-direction: column;
         text-align: center;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        max-width: 600px;
+    }
+    
+    .testimonial-card {
+        min-height: auto;
     }
     
     .hero-name {
@@ -1539,6 +1648,16 @@ html {
     
     .testimonials-heading {
         font-size: 45px;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        max-width: 600px;
+    }
+    
+    .testimonial-card {
+        min-height: auto;
     }
     
     .project-meta {

@@ -26,6 +26,7 @@
                     <a href="work.html" class="nav-link active">Work</a>
                     <a href="gallery.html" class="nav-link">Photoshoot</a>
                     <a href="social-media-grids.html" class="nav-link">Social Media Grids</a>
+                    <a href="pitch-decks.html" class="nav-link">Pitch Decks</a>
                     <a href="index.html#contact" class="nav-link btn-contact">Contact</a>
                 </nav>
                 <button class="hamburger" aria-label="Toggle menu">
@@ -43,6 +44,7 @@
                         <a href="work.html" class="mobile-nav-link active">Work</a>
                         <a href="gallery.html" class="mobile-nav-link">Photoshoot</a>
                         <a href="social-media-grids.html" class="mobile-nav-link">Social Media Grids</a>
+                        <a href="pitch-decks.html" class="mobile-nav-link">Pitch Decks</a>
                         <a href="index.html#contact" class="mobile-nav-link btn-contact">Contact</a>
                     </nav>
                 </div>
@@ -64,7 +66,6 @@
                     <h1 class="case-study-title">SUE MUE - Heritage Craft & Modern Expression</h1>
                     <div class="case-study-meta-row">
                         <p class="case-study-services">BRAND STRATEGY | CONTENT STRATEGY</p>
-                        <p class="case-study-category">FNB</p>
                     </div>
                 </div>
             </div>
@@ -82,7 +83,7 @@
                 </p>
             </div>
 
-            <!-- Image Section 1 - 2x2 Grid (4 images) -->
+            <!-- Image Section 1 - Grid (7 images) -->
             <div class="case-study-videos-grid">
                 <div class="video-item-medium">
                     <img src="" alt="Sue Mue Image 1" class="case-study-image" data-image="overview-1">
@@ -96,17 +97,27 @@
                 <div class="video-item-medium">
                     <img src="" alt="Sue Mue Image 4" class="case-study-image" data-image="overview-4">
                 </div>
+                <div class="video-item-medium">
+                    <img src="" alt="Sue Mue Image 5" class="case-study-image" data-image="overview-5">
+                </div>
+                <div class="video-item-medium">
+                    <img src="" alt="Sue Mue Image 6" class="case-study-image" data-image="overview-6">
+                </div>
+                <div class="video-item-medium">
+                    <img src="" alt="Sue Mue Image 7" class="case-study-image" data-image="overview-7">
+                </div>
             </div>
 
             <!-- Divider -->
             <div class="case-study-divider"></div>
 
-            <!-- Video Section - 2x2 Grid (4 videos) -->
+            <!-- Video Section - Grid (5 videos) -->
             <div class="case-study-videos-grid">
-                <div class="video-item-medium">
+                <div class="video-item-medium video-with-hashtag">
                     <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
                         <source src="" type="video/mp4" data-video="1">
                     </video>
+                    <p class="video-hashtag">#internationalyogaday</p>
                 </div>
                 <div class="video-item-medium">
                     <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
@@ -123,16 +134,11 @@
                         <source src="" type="video/mp4" data-video="4">
                     </video>
                 </div>
-            </div>
-
-            <!-- Hashtags Section -->
-            <div class="case-study-section">
-                <div class="hashtags-container">
-                    <span class="hashtag">#HeritageCraft</span>
-                    <span class="hashtag">#ModernExpression</span>
-                    <span class="hashtag">#TimelessElegance</span>
-                    <span class="hashtag">#ContemporaryCouture</span>
-                    <span class="hashtag">#ArtisanFashion</span>
+                <div class="video-item-medium video-with-hashtag">
+                    <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
+                        <source src="" type="video/mp4" data-video="5">
+                    </video>
+                    <p class="video-hashtag">#newyear</p>
                 </div>
             </div>
 
@@ -160,10 +166,14 @@
                 overview2: basePath + 'Crafting dreams into the tapestry of creativity, Alam, the master machine embroiderer at Sue Mue.jpg',
                 overview3: basePath + 'Heritage meets a new heartbeat - our latest blog explores why Gen Z is falling in love with Sue .jpg',
                 overview4: basePath + 'Rooted in grace, wrapped in warmth — Sabaa is a quiet ode to friendships that feel effortless, e.jpg',
+                overview5: basePath + 'Heritage meets a new heartbeat - our latest blog explores why Gen Z is falling in love with Sue -2.jpg',
+                overview6: basePath + 'Rabia - This is a pastel yellow pure silk organza short anarkali with a V-neck and churidhar sle.jpg',
+                overview7: basePath + 'Rabia - This is a pastel yellow pure silk organza short anarkali with a V-neck and churidhar sle-2.jpg',
                 video1: basePath + 'Celebrating International Yoga Day at the Sue Mue atelier with a rejuvenating yoga session led b.mp4',
                 video2: basePath + 'Like a gentle breeze, a grandmother\u2019s love wraps around her granddaughters, carrying wisdom, war.mp4',
                 video3: basePath + 'On this #HandloomDay, hear from our Creative Director Mohita Gujral (@mohitagujral) as we celebr.mp4',
                 video4: basePath + 'Rabia - This is a pastel yellow pure silk organza short anarkali with a V-neck and churidhar sle.mp4',
+                video5: basePath + 'Sue Mue 2025 Goals.mp4',
                 socialGrid1: basePath + 'SOCIAL MEDIA GRID_.jpg',
                 socialGrid2: basePath + 'SOCIAL MEDIA GRID_(1).jpg'
             };
@@ -172,8 +182,15 @@
             function encodeFilePath(path) {
                 // Replace backslashes with forward slashes first
                 path = path.replace(/\\/g, '/');
-                // Split and encode each segment
-                return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+                // Split and encode each segment, handling special characters like apostrophes
+                return path.split('/').map(segment => {
+                    // Encode the segment, which will handle apostrophes and other special chars
+                    // Double encode if needed to ensure apostrophes are handled
+                    let encoded = encodeURIComponent(segment);
+                    // Ensure apostrophes are encoded (should be %27)
+                    encoded = encoded.replace(/'/g, '%27');
+                    return encoded;
+                }).join('/');
             }
             
             // Set video sources
@@ -183,52 +200,40 @@
                 const fileKey = 'video' + videoNum;
                 if (files[fileKey]) {
                     const encodedPath = encodeFilePath(files[fileKey]);
-                    source.src = encodedPath;
-                    console.log(`Video ${videoNum}: ${encodedPath}`);
+                    source.setAttribute('src', encodedPath);
+                    // Load the parent video element
+                    const videoElement = source.closest('video');
+                    if (videoElement) {
+                        videoElement.load();
+                    }
                 }
             });
             
-            // Set image sources
-            document.querySelectorAll('img[data-image="hero"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.hero);
-                img.src = encodedPath;
-                console.log(`Hero image: ${encodedPath}`);
-            });
+            // Set hero image
+            const heroImage = document.querySelector('[data-image="hero"]');
+            if (heroImage && files.hero) {
+                const heroPath = encodeFilePath(files.hero);
+                heroImage.src = heroPath;
+            }
             
-            document.querySelectorAll('img[data-image="overview-1"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.overview1);
-                img.src = encodedPath;
-                console.log(`Overview image 1: ${encodedPath}`);
-            });
-            
-            document.querySelectorAll('img[data-image="overview-2"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.overview2);
-                img.src = encodedPath;
-                console.log(`Overview image 2: ${encodedPath}`);
-            });
-            
-            document.querySelectorAll('img[data-image="overview-3"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.overview3);
-                img.src = encodedPath;
-                console.log(`Overview image 3: ${encodedPath}`);
-            });
-            
-            document.querySelectorAll('img[data-image="overview-4"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.overview4);
-                img.src = encodedPath;
-                console.log(`Overview image 4: ${encodedPath}`);
-            });
-            
-            document.querySelectorAll('img[data-image="social-grid-1"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.socialGrid1);
-                img.src = encodedPath;
-                console.log(`Social grid 1: ${encodedPath}`);
-            });
-            
-            document.querySelectorAll('img[data-image="social-grid-2"]').forEach(img => {
-                const encodedPath = encodeFilePath(files.socialGrid2);
-                img.src = encodedPath;
-                console.log(`Social grid 2: ${encodedPath}`);
+            // Set all other images
+            document.querySelectorAll('[data-image]').forEach(function(img) {
+                const dataAttr = img.getAttribute('data-image');
+                if (dataAttr === 'hero') return; // Already handled
+                
+                let fileKey;
+                if (dataAttr.startsWith('overview-')) {
+                    fileKey = 'overview' + dataAttr.replace('overview-', '');
+                } else if (dataAttr.startsWith('social-grid-')) {
+                    fileKey = 'socialGrid' + dataAttr.replace('social-grid-', '');
+                } else {
+                    fileKey = dataAttr;
+                }
+                
+                if (files[fileKey]) {
+                    const imagePath = encodeFilePath(files[fileKey]);
+                    img.src = imagePath;
+                }
             });
             
             // Reload videos
@@ -250,6 +255,7 @@
                     <a href="work.html" class="footer-nav-link">Work</a>
                     <a href="gallery.html" class="footer-nav-link">Photoshoot</a>
                     <a href="social-media-grids.html" class="footer-nav-link">Social Media Grids</a>
+                    <a href="pitch-decks.html" class="footer-nav-link">Pitch Decks</a>
                     <a href="index.html#contact" class="footer-nav-link">Contact</a>
                 </nav>
                 <div class="footer-social">
@@ -263,12 +269,7 @@
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                     </a>
-                    <a href="https://twitter.com/taraanand" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:hello@taraanand.com" class="footer-social-link" aria-label="Email">
+                    <a href="mailto:taraanand99@gmail.com" class="footer-social-link" aria-label="Email">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
                         </svg>

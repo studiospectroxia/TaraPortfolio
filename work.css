@@ -9,13 +9,12 @@
 .work-page-header {
     margin-bottom: var(--spacing-2xl);
     position: relative;
-    padding-left: 50px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
 }
 
 .back-button {
-    position: absolute;
-    left: 0;
-    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,6 +22,7 @@
     height: 40px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
 .back-button:hover {
@@ -203,6 +203,14 @@
     gap: 16px;
 }
 
+.project-card-content:first-child {
+    margin-bottom: 12px;
+}
+
+.project-card-content:last-child {
+    margin-top: 16px;
+}
+
 .project-category {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
@@ -212,6 +220,7 @@
     text-align: left;
     align-self: flex-start;
     letter-spacing: 0.01em;
+    margin: 0;
 }
 
 .project-image {
@@ -300,9 +309,6 @@
         max-width: none;
     }
     
-    .work-page-header {
-        padding-left: 40px;
-    }
     
     .work-page-title {
         font-size: 38px;
@@ -317,10 +323,6 @@
 @media (max-width: 768px) {
     .work-page {
         padding: var(--spacing-2xl) 0;
-    }
-    
-    .work-page-header {
-        padding-left: 0;
     }
     
     .back-button {

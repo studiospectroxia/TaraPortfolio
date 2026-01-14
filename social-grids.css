@@ -99,22 +99,7 @@
         inset 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
-/* Rotation variations */
-.phone-rotate-left .phone-frame {
-    transform: rotate(-3deg);
-}
-
-.phone-rotate-left .phone-frame:hover {
-    transform: rotate(-3deg) translateY(-10px) scale(1.02);
-}
-
-.phone-rotate-right .phone-frame {
-    transform: rotate(3deg);
-}
-
-.phone-rotate-right .phone-frame:hover {
-    transform: rotate(3deg) translateY(-10px) scale(1.02);
-}
+/* Rotation variations removed - all photos are straight */
 
 /* Phone Screen */
 .phone-screen {
@@ -609,16 +594,7 @@
         padding: 10px 20px;
     }
     
-    /* Remove rotations on mobile for better UX */
-    .phone-rotate-left .phone-frame,
-    .phone-rotate-right .phone-frame {
-        transform: none;
-    }
-    
-    .phone-rotate-left .phone-frame:hover,
-    .phone-rotate-right .phone-frame:hover {
-        transform: translateY(-10px) scale(1.02);
-    }
+    /* All photos are straight on all screen sizes */
 }
 
 
