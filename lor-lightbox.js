@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // LOR file paths - mapped to testimonial order
     const lorFiles = [
-        'LOR\'s/Experience Letter - Shivranjani (Tara) Anand.pdf', // Ruhan Mann - Experience Letter
-        'LOR\'s/Letter of Recommendation - Shivranjani (Tara) Anand.pdf', // Ruhan Mann - LOR
+        'LOR\'s/Letter of Recommendation - Shivranjani (Tara) Anand.pdf', // Ruhani Mann - LOR
+        'LOR\'s/Letter of Recommendation - Shivranjani (Tara) Anand.pdf', // Ruhani Mann - LOR
         'LOR\'s/RecommendationLetter_TaraAnand.pdf', // Ishita Aggarwal - AGENC
         'LOR\'s/Tara Anand - LR.pdf' // Ishita Aggarwal - LR
     ];
@@ -55,11 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Map testimonials to LOR files
-    // First testimonial (Ruhan Mann) -> Experience Letter
+    // First testimonial (Ruhani Mann) -> Letter of Recommendation
     // Second testimonial (Ishita Aggarwal - AGENC) -> RecommendationLetter_TaraAnand.pdf
     // Third testimonial (Ishita Aggarwal) -> Tara Anand - LR.pdf
     const testimonialToLOR = {
-        0: 0, // Ruhan Mann -> Experience Letter
+        0: 0, // Ruhani Mann -> Letter of Recommendation
         1: 2, // Ishita Aggarwal (AGENC) -> RecommendationLetter_TaraAnand.pdf
         2: 3  // Ishita Aggarwal -> Tara Anand - LR.pdf
     };

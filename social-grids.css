@@ -391,7 +391,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-2xl);
+    gap: 30px;
 }
 
 .brand-expansion-close {
@@ -428,11 +428,13 @@
 }
 
 .brand-expansion-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 60px 40px;
     width: 100%;
-    padding: var(--spacing-xl) 0;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .brand-expansion-item {
@@ -446,6 +448,41 @@
 .brand-expansion-item:nth-child(5) { animation-delay: 0.5s; }
 .brand-expansion-item:nth-child(6) { animation-delay: 0.6s; }
 .brand-expansion-item:nth-child(n+7) { animation-delay: 0.7s; }
+
+/* Instagram Button in Brand Expansion Modal */
+.brand-expansion-instagram-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: var(--color-white);
+    padding: 16px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+    margin-top: 0;
+    z-index: 10002;
+    position: relative;
+}
+
+.brand-expansion-instagram-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(225, 48, 108, 0.6);
+}
+
+.brand-expansion-instagram-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.brand-expansion-instagram-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
 
 /* Responsive Design */
 @media (max-width: 1200px) {
@@ -592,6 +629,16 @@
     .brand-card::after {
         font-size: 14px;
         padding: 10px 20px;
+    }
+    
+    .brand-expansion-instagram-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+    
+    .brand-expansion-instagram-btn svg {
+        width: 18px;
+        height: 18px;
     }
     
     /* All photos are straight on all screen sizes */
