@@ -60,6 +60,8 @@
     position: relative;
     perspective: 1000px;
     animation: fadeInUp 0.6s ease-out backwards;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 @keyframes fadeInUp {
@@ -427,16 +429,57 @@
     letter-spacing: -0.02em;
 }
 
+/* Instagram Button in Brand Expansion Modal */
+.brand-expansion-instagram-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: var(--color-white);
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+    z-index: 10002;
+    cursor: pointer;
+}
+
+.brand-expansion-instagram-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(225, 48, 108, 0.6);
+}
+
+.brand-expansion-instagram-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.brand-expansion-instagram-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 .brand-expansion-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 60px 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px 20px;
     width: 100%;
     padding: var(--spacing-xl) 0;
+    justify-items: center;
+    justify-content: center;
 }
 
 .brand-expansion-item {
     animation: fadeInUp 0.6s ease-out backwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .brand-expansion-item:nth-child(1) { animation-delay: 0.1s; }
@@ -518,6 +561,40 @@
     .phone-frame {
         width: 160px;
         height: 340px;
+    }
+    
+    .social-grids-title {
+        font-size: 24px;
+    }
+    
+    .brand-expansion-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .brand-expansion-item {
+        width: 100%;
+    }
+    
+    .phone-wrapper {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+    
+    .lightbox-image {
+        max-width: 95vw;
+        max-height: 85vh;
+    }
+    
+    .brand-expansion-title {
+        font-size: 24px;
+    }
+    
+    .brand-expansion-instagram-btn {
+        font-size: var(--font-size-base);
+        padding: 12px 20px;
+    }
         padding: 8px;
         border-radius: 28px;
     }
@@ -586,7 +663,7 @@
     }
     
     .brand-expansion-grid {
-        gap: 30px 20px;
+        gap: 25px 15px;
     }
     
     .brand-card::after {

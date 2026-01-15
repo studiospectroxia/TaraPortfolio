@@ -66,6 +66,9 @@
                     <h1 class="case-study-title">FLYING MACHINE- FM X ORRY - DESIGNED TO DISRUPT</h1>
                     <div class="case-study-meta-row">
                         <p class="case-study-services">BRAND STRATEGY | CONTENT STRATEGY | SOCIAL MEDIA LAUNCH</p>
+                        <div class="case-study-collaborations">
+                            <span class="case-study-collaborations-text">with <span class="case-study-collaborations-bold">Brand Talk</span></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,12 +90,12 @@
 
             <!-- Video Section 1 - 2 videos side by side -->
             <div class="case-study-videos-grid" style="grid-template-columns: repeat(2, 1fr);">
-                <div class="video-item-medium">
+                <div class="video-item-medium video-reel">
                     <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
                         <source src="" type="video/mp4" data-video="1">
                     </video>
                 </div>
-                <div class="video-item-medium">
+                <div class="video-item-medium video-reel">
                     <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
                         <source src="" type="video/mp4" data-video="2">
                     </video>
@@ -120,17 +123,17 @@
                 
                 <!-- Video Section 2 - 3 Videos (2 on top, 1 centered below) -->
                 <div class="case-study-videos-three">
-                    <div class="video-item-large">
+                    <div class="video-item-large video-reel">
                         <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
                             <source src="" type="video/mp4" data-video="3">
                         </video>
                     </div>
-                    <div class="video-item-large">
+                    <div class="video-item-large video-reel">
                         <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
                             <source src="" type="video/mp4" data-video="4">
                         </video>
                     </div>
-                    <div class="video-item-large">
+                    <div class="video-item-large video-reel">
                         <video autoplay loop muted playsinline class="case-study-video" preload="metadata">
                             <source src="" type="video/mp4" data-video="5">
                         </video>
@@ -142,30 +145,33 @@
             <div class="case-study-section">
                 <h2 class="section-title">SOCIAL MEDIA GRIDS-</h2>
                 <div class="social-grid-container">
-                    <img src="" alt="Social Media Grid" class="social-grid-image" data-image="social-grid">
+                    <img src="" alt="Social Media Grid" class="social-grid-image" data-image="social-grid-1">
+                    <img src="" alt="Social Media Grid 2" class="social-grid-image" data-image="social-grid-2">
                 </div>
             </div>
 
             <!-- Results Section -->
             <div class="case-study-section results-section">
                 <h2 class="section-title">RESULTS-</h2>
-                <div class="results-grid">
-                    <div class="result-item">
-                        <h3 class="result-number">250M+</h3>
-                        <p class="result-description">Reach across digital, media, and experiential channels</p>
+                <div class="results-container">
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <h3 class="result-number">250M+</h3>
+                            <p class="result-description">Reach across digital, media, and experiential channels</p>
+                        </div>
+                        <div class="result-item">
+                            <h3 class="result-number">25M+</h3>
+                            <p class="result-description">in earned media value, showcasing strong campaign recall and media impact</p>
+                        </div>
+                        <div class="result-item">
+                            <h3 class="result-award">Silver at Agency Reporter Experiential PR Awards</h3>
+                            <p class="result-description">recognizing innovation in brand storytelling and experience design</p>
+                        </div>
                     </div>
-                    <div class="result-item">
-                        <h3 class="result-number">25M+</h3>
-                        <p class="result-description">in earned media value, showcasing strong campaign recall and media impact</p>
-                    </div>
-                    <div class="result-item">
-                        <h3 class="result-award">Silver at Agency Reporter Experiential PR Awards</h3>
-                        <p class="result-description">recognizing innovation in brand storytelling and experience design</p>
-                    </div>
+                    <p class="results-conclusion">
+                        The campaign didn't just elevate Flying Machine - it redefined its place in culture. The campaign proved that when strategy, creativity, and timing align, the result is a brand moment that truly lands.
+                    </p>
                 </div>
-                <p class="results-conclusion">
-                    The campaign didn't just elevate Flying Machine - it redefined its place in culture. The campaign proved that when strategy, creativity, and timing align, the result is a brand moment that truly lands.
-                </p>
             </div>
         </div>
     </section>
@@ -179,8 +185,9 @@
             const basePath = 'Case studies/Flying Machine x Orry/';
             
             const files = {
-                videoHero: basePath + 'Hey Delhi, it’s SHOWTIME! 🔥Orry is taking over DLF Mall of India today, September 28th at 4 PM!.mp4',
-                socialGrid: basePath + 'SOCIAL MEDIA GRID.jpg',
+                videoHero: basePath + 'Hey Delhi, it\u2019s SHOWTIME! 🔥Orry is taking over DLF Mall of India today, September 28th at 4 PM!.mp4',
+                socialGrid1: basePath + 'SOCIAL MEDIA GRID.jpg',
+                socialGrid2: basePath + 'SOCIAL MEDIA GRID 2.PNG',
                 video1: basePath + 'If you felt the heat in Bangalore, it was definitely us! 🔥 @orry X @flyingmachine80 = 100_ DAMN.mp4',
                 video2: basePath + 'Can\u2019t get over this! Orry X Flying Machine turned up the heat and we\u2019re barely cooling down! 🔥 .mp4',
                 video3: basePath + 'Hey Delhi, it\u2019s SHOWTIME! 🔥Orry is taking over DLF Mall of India today, September 28th at 4 PM!.mp4',
@@ -213,21 +220,34 @@
                     
                     // Reload the video element after setting source
                     const video = source.closest('video');
-                    if (video && videoAttr === 'hero') {
+                    if (video) {
                         video.load();
-                        video.play().catch(e => {
-                            console.log('Hero video autoplay prevented:', e);
-                        });
+                        if (videoAttr === 'hero') {
+                            video.play().catch(e => {
+                                console.log('Hero video autoplay prevented:', e);
+                            });
+                        }
                     }
+                } else {
+                    console.warn(`No file found for video attribute: ${videoAttr}`);
                 }
             });
             
             // Set image sources
             document.querySelectorAll('[data-image]').forEach(function(img) {
                 const dataAttr = img.getAttribute('data-image');
-                if (dataAttr === 'social-grid' && files.socialGrid) {
-                    const imagePath = encodeFilePath(files.socialGrid);
+                let fileKey;
+                if (dataAttr.startsWith('social-grid-')) {
+                    fileKey = 'socialGrid' + dataAttr.replace('social-grid-', '');
+                } else if (dataAttr === 'social-grid') {
+                    fileKey = 'socialGrid1';
+                }
+                if (fileKey && files[fileKey]) {
+                    const imagePath = encodeFilePath(files[fileKey]);
                     img.src = imagePath;
+                    console.log(`Image ${dataAttr}: ${imagePath}`);
+                } else {
+                    console.warn(`No file found for image attribute: ${dataAttr}`);
                 }
             });
             

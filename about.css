@@ -364,18 +364,8 @@
 
 .carousel-image {
     flex-shrink: 0;
-    width: 240px;
-    height: 320px;
-}
-
-.carousel-image:nth-child(2) {
-    width: 300px;
-    height: 460px;
-}
-
-.carousel-image:nth-child(3) {
-    width: 260px;
-    height: 450px;
+    width: 280px;
+    height: 380px;
 }
 
 .carousel-image img {
@@ -530,7 +520,7 @@
         width: 100% !important;
         max-width: 280px;
         height: auto !important;
-        aspect-ratio: 240 / 320;
+        aspect-ratio: 280 / 380;
     }
     
     .bottom-text {

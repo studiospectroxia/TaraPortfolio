@@ -79,6 +79,12 @@
                         </svg>
                     </button>
                     <h2 class="brand-expansion-title" id="brandExpansionTitle"></h2>
+                    <a href="#" id="brandExpansionInstagram" target="_blank" rel="noopener noreferrer" class="brand-expansion-instagram-btn" style="display: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        Open Instagram
+                    </a>
                     <div class="brand-expansion-grid" id="brandExpansionGrid">
                         <!-- Expanded images will be loaded here -->
                     </div>
@@ -122,8 +128,8 @@
             const phoneGrid = document.getElementById('phoneGrid');
             const basePath = 'SOCIAL MEDIA GRIDS/';
             
-            // List of image files
-            const imageFiles = [
+            // List of image files from SOCIAL MEDIA GRIDS folder
+            const socialGridsFiles = [
                 'AAJUNI.jpg',
                 'AAJUNI(1).jpg',
                 'AROHI.jpg',
@@ -147,6 +153,25 @@
                 'ZABELLA.jpg'
             ];
             
+            // Case study social media grids
+            const caseStudyGrids = [
+                { brand: 'FLYING MACHINE X ORRY', files: ['Case studies/Flying Machine x Orry/SOCIAL MEDIA GRID.jpg', 'Case studies/Flying Machine x Orry/SOCIAL MEDIA GRID 2.PNG'] },
+                { brand: 'SUPR', files: ['Case studies/SUPR/SOCIAL MEDIA GRID.jpg', 'Case studies/SUPR/social media grid(1).jpg'] },
+                { brand: 'SUNEET VARMA', files: ['Case studies/SUNEET VARMA/SOCIAL MEDIA GRID_.jpg', 'Case studies/SUNEET VARMA/SOCIAL MEDIA GRID_(1).jpg'] },
+                { brand: 'SUE MUE', files: ['Case studies/SUE MUE/SOCIAL MEDIA GRID_.jpg', 'Case studies/SUE MUE/SOCIAL MEDIA GRID_(1).jpg'] },
+                { brand: 'OLIVE', files: ['Case studies/OLIVE/SOCIAL MEDIA GRID_.jpg', 'Case studies/OLIVE/SOCIAL MEDIA GRID_(1).jpg'] },
+                { brand: 'JOI', files: ['Case studies/JOI/SOCIAL MEDIA GRID.jpg'] },
+                { brand: 'WELLNESS CLUB AT SHANGRI-LA', files: ['Case studies/WELLNESS CLUB AT SHANGRI- LA/SOCIAL MEDIA GRID_.jpg'] }
+            ];
+            
+            // Combine all files
+            const imageFiles = [...socialGridsFiles];
+            caseStudyGrids.forEach(brandGroup => {
+                brandGroup.files.forEach(file => {
+                    imageFiles.push(file);
+                });
+            });
+            
             // Function to properly encode file paths for URLs
             function encodeFilePath(path) {
                 path = path.replace(/\\/g, '/');
@@ -155,8 +180,16 @@
             
             // Function to extract brand name from filename
             function getBrandName(filename) {
-                // Remove .jpg extension and any (1), (2) patterns
-                let brandName = filename.replace('.jpg', '').replace(/\(\d+\)/g, '').trim();
+                // Check if it's a case study grid
+                for (const brandGroup of caseStudyGrids) {
+                    if (brandGroup.files.includes(filename)) {
+                        return brandGroup.brand;
+                    }
+                }
+                // Remove .jpg/.PNG extension and any (1), (2) patterns
+                let brandName = filename.replace(/\.(jpg|JPG|png|PNG)$/, '').replace(/\(\d+\)/g, '').trim();
+                // Remove folder path if present
+                brandName = brandName.split('/').pop();
                 // Convert to uppercase
                 return brandName.toUpperCase();
             }
@@ -177,7 +210,14 @@
                 'RED': 'https://www.instagram.com/red_vasantvihar/',
                 'UNO JOBS': 'https://www.instagram.com/unojobs/',
                 'WELLNESS CLUB AT SHANG': 'https://www.instagram.com/wellnessclubshangrila/',
-                'ZABELLA': 'https://www.instagram.com/zabellaofficial/'
+                'WELLNESS CLUB AT SHANGRI-LA': 'https://www.instagram.com/wellnessclubshangrila/',
+                'ZABELLA': 'https://www.instagram.com/zabellaofficial/',
+                'FLYING MACHINE X ORRY': 'https://www.instagram.com/flyingmachine80/',
+                'SUPR': 'https://www.instagram.com/supr_india/',
+                'SUNEET VARMA': 'https://www.instagram.com/suneetvarmaofficial/',
+                'SUE MUE': 'https://www.instagram.com/suemueofficial/',
+                'OLIVE': 'https://www.instagram.com/olivebarandkitchen/',
+                'JOI': 'https://www.instagram.com/joi_india/'
             };
             
             // Function to get Instagram URL from filename
@@ -195,6 +235,16 @@
                 }
                 brandGroups[brandName].push({ filename, index });
             });
+            
+            // Function to get full path for an image
+            function getImagePath(filename) {
+                // If it's already a full path (case study), return as is
+                if (filename.includes('Case studies/')) {
+                    return filename;
+                }
+                // Otherwise, prepend the base path
+                return basePath + filename;
+            }
             
             // Create brand cards (one per brand)
             let brandIndex = 0;
@@ -218,7 +268,8 @@
                 phoneScreen.className = 'phone-screen';
                 
                 const img = document.createElement('img');
-                const encodedPath = encodeFilePath(basePath + firstImage.filename);
+                const imagePath = getImagePath(firstImage.filename);
+                const encodedPath = encodeFilePath(imagePath);
                 img.src = encodedPath;
                 img.alt = brandName;
                 img.className = 'phone-content';
@@ -268,9 +319,25 @@
                 const modal = document.getElementById('brandExpansionModal');
                 const title = document.getElementById('brandExpansionTitle');
                 const grid = document.getElementById('brandExpansionGrid');
+                const instagramBtn = document.getElementById('brandExpansionInstagram');
                 
                 title.textContent = brandName;
                 grid.innerHTML = '';
+                
+                // Show Instagram button if available
+                const firstImageFilename = brandImages[0].filename;
+                const instagramUrl = getInstagramUrl(firstImageFilename);
+                if (instagramUrl) {
+                    instagramBtn.href = instagramUrl;
+                    instagramBtn.style.display = 'flex';
+                    // Ensure click works properly
+                    instagramBtn.onclick = function(e) {
+                        e.stopPropagation();
+                        window.open(instagramUrl, '_blank', 'noopener,noreferrer');
+                    };
+                } else {
+                    instagramBtn.style.display = 'none';
+                }
                 
                 // Create grid items for all brand images
                 brandImages.forEach((imageData, index) => {
@@ -287,7 +354,8 @@
                     phoneScreen.className = 'phone-screen';
                     
                     const img = document.createElement('img');
-                    const encodedPath = encodeFilePath(basePath + imageData.filename);
+                    const imagePath = getImagePath(imageData.filename);
+                    const encodedPath = encodeFilePath(imagePath);
                     img.src = encodedPath;
                     img.alt = brandName;
                     img.className = 'phone-content';
@@ -298,7 +366,8 @@
                         // Find all images for this brand in the full list
                         const allBrandImages = brandGroups[brandName].map(item => item.filename);
                         const imageIndex = imageFiles.indexOf(imageData.filename);
-                        openLightbox(imageIndex, imageFiles, basePath);
+                        const lightboxBasePath = imageData.filename.includes('Case studies/') ? '' : basePath;
+                        openLightbox(imageIndex, imageFiles, lightboxBasePath);
                     });
                     
                     phoneScreen.appendChild(img);
@@ -325,6 +394,10 @@
                     closeBrandExpansion();
                 }
             });
+            // Prevent modal from closing when clicking Instagram button
+            document.getElementById('brandExpansionInstagram').addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
             
             // Keyboard navigation for brand expansion
             document.addEventListener('keydown', function(e) {
@@ -349,7 +422,8 @@
                 const lightbox = document.getElementById('lightbox');
                 const lightboxImage = document.getElementById('lightboxImage');
                 const instagramBtn = document.getElementById('lightboxInstagram');
-                const encodedPath = encodeFilePath(base + files[index]);
+                const imagePath = files[index].includes('Case studies/') ? files[index] : base + files[index];
+                const encodedPath = encodeFilePath(imagePath);
                 
                 lightboxImage.src = encodedPath;
                 lightboxImage.alt = files[index].replace('.jpg', '').replace(/[()]/g, ' ');
@@ -359,6 +433,11 @@
                 if (instagramUrl) {
                     instagramBtn.href = instagramUrl;
                     instagramBtn.style.display = 'flex';
+                    // Ensure click works properly
+                    instagramBtn.onclick = function(e) {
+                        e.stopPropagation();
+                        window.open(instagramUrl, '_blank', 'noopener,noreferrer');
+                    };
                 } else {
                     instagramBtn.style.display = 'none';
                 }
@@ -388,7 +467,8 @@
             function updateLightboxImage() {
                 const lightboxImage = document.getElementById('lightboxImage');
                 const instagramBtn = document.getElementById('lightboxInstagram');
-                const encodedPath = encodeFilePath(imageBasePath + imageList[currentImageIndex]);
+                const imagePath = imageList[currentImageIndex].includes('Case studies/') ? imageList[currentImageIndex] : imageBasePath + imageList[currentImageIndex];
+                const encodedPath = encodeFilePath(imagePath);
                 
                 lightboxImage.src = encodedPath;
                 lightboxImage.alt = imageList[currentImageIndex].replace('.jpg', '').replace(/[()]/g, ' ');
@@ -398,6 +478,11 @@
                 if (instagramUrl) {
                     instagramBtn.href = instagramUrl;
                     instagramBtn.style.display = 'flex';
+                    // Ensure click works properly
+                    instagramBtn.onclick = function(e) {
+                        e.stopPropagation();
+                        window.open(instagramUrl, '_blank', 'noopener,noreferrer');
+                    };
                 } else {
                     instagramBtn.style.display = 'none';
                 }
