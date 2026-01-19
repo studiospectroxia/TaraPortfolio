@@ -393,7 +393,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-lg);
 }
 
 .brand-expansion-close {
@@ -465,12 +465,14 @@
 
 .brand-expansion-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px 20px;
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
+    gap: 2px 2px;
+    width: fit-content;
+    max-width: 100%;
     padding: var(--spacing-xl) 0;
     justify-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .brand-expansion-item {
@@ -480,6 +482,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin: 0;
 }
 
 .brand-expansion-item:nth-child(1) { animation-delay: 0.1s; }
@@ -663,7 +666,8 @@
     }
     
     .brand-expansion-grid {
-        gap: 25px 15px;
+        gap: 2px 2px;
+        width: fit-content;
     }
     
     .brand-card::after {

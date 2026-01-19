@@ -24,7 +24,7 @@
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="about.html" class="nav-link">About Me</a>
                     <a href="work.html" class="nav-link">Work</a>
-                    <a href="gallery.html" class="nav-link">Photoshoot</a>
+                    <a href="gallery.html" class="nav-link">Photoshoots</a>
                     <a href="social-media-grids.html" class="nav-link active">Social Media Grids</a>
                     <a href="pitch-decks.html" class="nav-link">Pitch Decks</a>
                     <a href="index.html#contact" class="nav-link btn-contact">Contact</a>
@@ -42,7 +42,7 @@
                         <a href="index.html" class="mobile-nav-link">Home</a>
                         <a href="about.html" class="mobile-nav-link">About Me</a>
                         <a href="work.html" class="mobile-nav-link">Work</a>
-                        <a href="gallery.html" class="mobile-nav-link">Photoshoot</a>
+                        <a href="gallery.html" class="mobile-nav-link">Photoshoots</a>
                         <a href="social-media-grids.html" class="mobile-nav-link active">Social Media Grids</a>
                         <a href="pitch-decks.html" class="mobile-nav-link">Pitch Decks</a>
                         <a href="index.html#contact" class="mobile-nav-link btn-contact">Contact</a>
@@ -132,9 +132,11 @@
             const socialGridsFiles = [
                 'AAJUNI.jpg',
                 'AAJUNI(1).jpg',
+                'aanchalsayal1.jpeg',
+                'aanchalsayal2.jpeg',
                 'AROHI.jpg',
                 'BEYOND DESIGNS.jpg',
-                'BEYOND DESIGNS(1).jpg',
+                'bd2.jpeg',
                 'BLUR THE BORDER.jpg',
                 'BOMBA.jpg',
                 'BOMBA(1).jpg',
@@ -150,7 +152,7 @@
                 'RED(1).jpg',
                 'UNO JOBS.jpg',
                 'WELLNESS CLUB AT SHANG.jpg',
-                'ZABELLA.jpg'
+                'ZABELLA.jpeg'
             ];
             
             // Case study social media grids
@@ -186,8 +188,16 @@
                         return brandGroup.brand;
                     }
                 }
-                // Remove .jpg/.PNG extension and any (1), (2) patterns
-                let brandName = filename.replace(/\.(jpg|JPG|png|PNG)$/, '').replace(/\(\d+\)/g, '').trim();
+                // Special mapping for specific filenames
+                if (filename === 'bd2.jpeg' || filename.toUpperCase() === 'BD2.JPEG') {
+                    return 'BEYOND DESIGNS';
+                }
+                // Special mapping for Aanchal Sayal images
+                if (filename.toLowerCase().includes('aanchalsayal')) {
+                    return 'AANCHAL SAYAL';
+                }
+                // Remove .jpg/.jpeg/.PNG extension and any (1), (2) patterns
+                let brandName = filename.replace(/\.(jpg|JPG|jpeg|JPEG|png|PNG)$/, '').replace(/\(\d+\)/g, '').trim();
                 // Remove folder path if present
                 brandName = brandName.split('/').pop();
                 // Convert to uppercase
@@ -524,7 +534,7 @@
                     <a href="index.html" class="footer-nav-link">Home</a>
                     <a href="about.html" class="footer-nav-link">About Me</a>
                     <a href="work.html" class="footer-nav-link">Work</a>
-                    <a href="gallery.html" class="footer-nav-link">Photoshoot</a>
+                    <a href="gallery.html" class="footer-nav-link">Photoshoots</a>
                     <a href="social-media-grids.html" class="footer-nav-link">Social Media Grids</a>
                     <a href="pitch-decks.html" class="footer-nav-link">Pitch Decks</a>
                     <a href="index.html#contact" class="footer-nav-link">Contact</a>

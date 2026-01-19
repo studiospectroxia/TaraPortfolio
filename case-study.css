@@ -57,11 +57,12 @@
 
 .case-study-meta-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     margin-top: 0;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .case-study-services {
@@ -98,7 +99,7 @@
     color: #888;
     text-transform: uppercase;
     margin: 0;
-    text-align: right;
+    text-align: left;
     flex: 0 0 auto;
     line-height: 1.3;
     letter-spacing: 0.01em;
