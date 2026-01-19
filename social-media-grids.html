@@ -192,8 +192,12 @@
                 if (filename === 'bd2.jpeg' || filename.toUpperCase() === 'BD2.JPEG') {
                     return 'BEYOND DESIGNS';
                 }
-                // Special mapping for Aanchal Sayal images
-                if (filename.toLowerCase().includes('aanchalsayal')) {
+                // Special mapping for The Library (aanchalsayal1.jpeg)
+                if (filename.toLowerCase() === 'aanchalsayal1.jpeg') {
+                    return 'THE LIBRARY';
+                }
+                // Special mapping for Aanchal Sayal (aanchalsayal2.jpeg)
+                if (filename.toLowerCase() === 'aanchalsayal2.jpeg') {
                     return 'AANCHAL SAYAL';
                 }
                 // Remove .jpg/.jpeg/.PNG extension and any (1), (2) patterns
@@ -227,7 +231,9 @@
                 'SUNEET VARMA': 'https://www.instagram.com/suneetvarmaofficial/',
                 'SUE MUE': 'https://www.instagram.com/suemueofficial/',
                 'OLIVE': 'https://www.instagram.com/olivebarandkitchen/',
-                'JOI': 'https://www.instagram.com/joi_india/'
+                'JOI': 'https://www.instagram.com/joi_india/',
+                'THE LIBRARY': 'https://www.instagram.com/librarybar.leelapalace/',
+                'AANCHAL SAYAL': 'https://www.instagram.com/aanchalsayal?igsh=eWMyNWR6Z3JuMHJ3'
             };
             
             // Function to get Instagram URL from filename
