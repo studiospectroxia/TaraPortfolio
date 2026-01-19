@@ -53,7 +53,7 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    cursor: none; /* Hide default cursor when resume cursor is active */
+    cursor: auto; /* Default cursor */
 }
 
 body.show-resume-cursor {
@@ -180,12 +180,19 @@ html {
     position: sticky;
     top: 0;
     background-color: var(--color-black);
-    z-index: 1000;
+    z-index: 10000;
     padding: 24px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeInDown 0.6s ease-out;
+    pointer-events: auto;
+    cursor: auto;
+}
+
+.header * {
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 @keyframes fadeInDown {
@@ -217,12 +224,17 @@ html {
     color: var(--color-white);
     text-decoration: none;
     letter-spacing: -0.02em;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 10001;
 }
 
 .nav {
     display: flex;
     gap: var(--spacing-lg);
     align-items: center;
+    pointer-events: auto;
+    z-index: 10001;
 }
 
 /* Hamburger Menu Button */
@@ -234,8 +246,9 @@ html {
     border: none;
     cursor: pointer;
     padding: 8px;
-    z-index: 1001;
+    z-index: 10001;
     position: relative;
+    pointer-events: auto;
 }
 
 .hamburger span {
@@ -268,10 +281,11 @@ html {
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.95);
-    z-index: 1000;
+    z-index: 10000;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: auto;
 }
 
 .mobile-menu-overlay.active {
@@ -287,11 +301,12 @@ html {
     max-width: 320px;
     height: 100vh;
     background-color: var(--color-black);
-    z-index: 1001;
+    z-index: 10001;
     padding: var(--spacing-4xl) var(--spacing-xl);
     transition: right 0.3s ease;
     overflow-y: auto;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: auto;
 }
 
 .mobile-menu-overlay.active .mobile-menu {
@@ -314,6 +329,9 @@ html {
     transition: color 0.3s ease;
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 10001;
 }
 
 .mobile-nav-link:hover,
@@ -343,6 +361,9 @@ html {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: 0.01em;
     position: relative;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 10001;
 }
 
 .nav-link::after {
@@ -375,6 +396,9 @@ html {
     padding: 10px 28px;
     border-radius: 30px;
     transition: all 0.3s ease;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 10001;
 }
 
 .btn-contact:hover {
@@ -648,6 +672,9 @@ html {
     letter-spacing: 0.01em;
     position: relative;
     overflow: hidden;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 10001;
 }
 
 .btn-primary::before {
@@ -1771,6 +1798,14 @@ html {
     }
 }
 
+/* Ensure all buttons and links are clickable */
+a, button, .btn-primary, .btn-contact, .btn-service, .btn-testimonial, .btn-submit {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative;
+    z-index: 10001;
+}
+
 /* Custom Resume Cursor */
 .resume-cursor {
     position: fixed;
@@ -1779,7 +1814,7 @@ html {
     pointer-events: none;
     z-index: 9999;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.1s ease-out;
     transform: translate(-50%, -50%);
     will-change: transform;
 }
@@ -1788,7 +1823,11 @@ html {
     opacity: 1 !important;
     pointer-events: auto;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+}
+
+.resume-cursor.fading {
+    opacity: 0 !important;
+    pointer-events: none;
 }
 
 .resume-cursor-circle {
@@ -1796,7 +1835,7 @@ html {
     height: 100%;
     border: 2px solid var(--color-orange);
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;

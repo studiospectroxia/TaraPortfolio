@@ -262,9 +262,49 @@
                 return basePath + filename;
             }
             
+            // Brand priority order for social media grids
+            const brandPriority = [
+                'FLYING MACHINE X ORRY',
+                'SUPR',
+                'SUE MUE',
+                'BEYOND DESIGNS',
+                'AAJUNI',
+                'ZABELLA',
+                'RED',
+                'MAMA MIA',
+                'JOI',
+                'SUNEET VARMA',
+                'WELLNESS CLUB AT SHANGRI-LA',
+                'WELLNESS CLUB AT SHANG',
+                'BOMBA',
+                'GOLDEN GRAIN'
+            ];
+            
+            // Sort brands according to priority
+            function sortBrandsByPriority(brandNames) {
+                return brandNames.sort((a, b) => {
+                    const indexA = brandPriority.indexOf(a);
+                    const indexB = brandPriority.indexOf(b);
+                    
+                    // If both are in priority list, sort by their index
+                    if (indexA !== -1 && indexB !== -1) {
+                        return indexA - indexB;
+                    }
+                    // If only A is in priority list, A comes first
+                    if (indexA !== -1) return -1;
+                    // If only B is in priority list, B comes first
+                    if (indexB !== -1) return 1;
+                    // If neither is in priority list, maintain original order (alphabetical)
+                    return a.localeCompare(b);
+                });
+            }
+            
+            // Get sorted brand names
+            const sortedBrandNames = sortBrandsByPriority(Object.keys(brandGroups));
+            
             // Create brand cards (one per brand)
             let brandIndex = 0;
-            Object.keys(brandGroups).forEach((brandName) => {
+            sortedBrandNames.forEach((brandName) => {
                 const brandImages = brandGroups[brandName];
                 const firstImage = brandImages[0];
                 

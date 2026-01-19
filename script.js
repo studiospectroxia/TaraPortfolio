@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Animate buttons
-    const buttons = document.querySelectorAll('.btn-primary, .btn-contact, .btn-testimonial, .btn-service, a.btn-primary, a.btn-service, a.btn-contact, button');
+    const buttons = document.querySelectorAll('.btn-primary, .btn-contact, .btn-testimonial');
     buttons.forEach((btn, index) => {
         btn.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
     });
@@ -282,164 +282,193 @@ window.addEventListener('load', function() {
     }, 100);
 });
 
-// Custom Resume Cursor - FIXED VERSION
+// Custom Resume Cursor
 document.addEventListener('DOMContentLoaded', function() {
     const resumeCursor = document.getElementById('resumeCursor');
-    if (!resumeCursor) {
-        console.error('Resume cursor not found');
-        return;
-    }
-    console.log('✅ Resume cursor found');
+    if (!resumeCursor) return;
     
     const heroSection = document.querySelector('.hero');
-    const servicesSection = document.querySelector('.services');
-    const workSection = document.querySelector('.work');
+    const aboutSection = document.querySelector('.about');
+    const brandsSection = document.querySelector('.brands');
+    const header = document.querySelector('.header');
     
-    if (!heroSection || !servicesSection) {
-        console.error('Hero or Services section not found');
-        return;
-    }
-    console.log('✅ Sections found - Hero:', heroSection.offsetTop, 'Services:', servicesSection.offsetTop);
+    if (!heroSection || !aboutSection) return;
     
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let cursorX = mouseX;
-    let cursorY = mouseY;
-    let isAnimating = false;
-    let isHoveringButton = false;
-    
-    // Initialize cursor position
-    resumeCursor.style.left = cursorX + 'px';
-    resumeCursor.style.top = cursorY + 'px';
-    resumeCursor.style.transition = 'opacity 0.3s ease';
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let isOverNavbar = false;
+    let isOverBrands = false;
+    let isOverButton = false;
     
     // Update cursor position with smooth following
     function updateCursor() {
-        if (!isAnimating) {
-            isAnimating = true;
-            requestAnimationFrame(function animate() {
-                const dx = mouseX - cursorX;
-                const dy = mouseY - cursorY;
-                
-                cursorX += dx * 0.15;
-                cursorY += dy * 0.15;
-                
-                resumeCursor.style.left = cursorX + 'px';
-                resumeCursor.style.top = cursorY + 'px';
-                
-                if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    isAnimating = false;
-                }
-            });
-        }
+        const dx = mouseX - cursorX;
+        const dy = mouseY - cursorY;
+        
+        cursorX += dx * 0.1;
+        cursorY += dy * 0.1;
+        
+        resumeCursor.style.left = cursorX + 'px';
+        resumeCursor.style.top = cursorY + 'px';
+        
+        requestAnimationFrame(updateCursor);
     }
     
-    // Check if cursor should be visible based on scroll position
+    // Check if cursor should be visible based on scroll position and hover state
     function checkCursorVisibility() {
-        if (isHoveringButton) {
+        const scrollY = window.scrollY;
+        const heroTop = heroSection.offsetTop;
+        const heroBottom = heroTop + heroSection.offsetHeight;
+        const aboutTop = aboutSection.offsetTop;
+        const aboutBottom = aboutTop + aboutSection.offsetHeight;
+        const brandsTop = brandsSection ? brandsSection.offsetTop : Infinity;
+        
+        // Hide cursor if over navbar or buttons
+        if (isOverNavbar || isOverButton) {
+            resumeCursor.classList.remove('active');
+            resumeCursor.classList.add('fading');
             resumeCursor.style.opacity = '0';
             document.body.classList.remove('show-resume-cursor');
             return;
         }
         
-        const scrollY = window.scrollY || window.pageYOffset;
-        const heroTop = heroSection.offsetTop;
-        const servicesTop = servicesSection.offsetTop;
-        const servicesBottom = servicesTop + servicesSection.offsetHeight;
-        const workTop = workSection ? workSection.offsetTop : Infinity;
-        
-        // Show cursor from hero section start to services section end
-        // Fade out when approaching work section
-        const shouldShow = scrollY >= heroTop - 50 && scrollY <= servicesBottom + 100;
-        const nearWork = workSection && scrollY >= workTop - 200;
-        
-        if (shouldShow && !nearWork) {
-            if (!resumeCursor.classList.contains('active')) {
-                resumeCursor.classList.add('active');
-                document.body.classList.add('show-resume-cursor');
-                resumeCursor.style.pointerEvents = 'auto';
-                resumeCursor.style.opacity = '1';
-            }
-        } else if (nearWork) {
-            // Fade out when entering work section
-            const fadeProgress = Math.min((scrollY - (workTop - 200)) / 200, 1);
-            resumeCursor.style.opacity = (1 - fadeProgress).toString();
-            if (fadeProgress >= 1) {
+        // Calculate fade progress when entering brands section
+        let fadeProgress = 1;
+        if (brandsSection && scrollY >= brandsTop - 200) {
+            const scrollIntoBrands = scrollY - (brandsTop - 200);
+            // Fade out over first 200px of scrolling into brands section
+            fadeProgress = Math.max(0, 1 - (scrollIntoBrands / 200));
+            isOverBrands = true;
+            
+            // Completely hide if scrolled past fade zone
+            if (fadeProgress <= 0) {
                 resumeCursor.classList.remove('active');
+                resumeCursor.classList.add('fading');
+                resumeCursor.style.opacity = '0';
                 document.body.classList.remove('show-resume-cursor');
-                resumeCursor.style.pointerEvents = 'none';
-            } else {
+                return;
+            }
+        } else {
+            isOverBrands = false;
+        }
+        
+        // Show cursor if we're between hero start and about section end
+        if (scrollY >= heroTop - 100 && scrollY <= aboutBottom) {
+            // Apply fade progress if transitioning into brands
+            if (fadeProgress < 1 && fadeProgress > 0) {
+                resumeCursor.style.opacity = fadeProgress.toString();
                 resumeCursor.classList.add('active');
+                resumeCursor.classList.remove('fading');
+                document.body.classList.add('show-resume-cursor');
+            } else if (fadeProgress >= 1) {
+                resumeCursor.classList.add('active');
+                resumeCursor.classList.remove('fading');
+                resumeCursor.style.opacity = '';
                 document.body.classList.add('show-resume-cursor');
             }
         } else {
-            if (resumeCursor.classList.contains('active')) {
-                resumeCursor.classList.remove('active');
-                document.body.classList.remove('show-resume-cursor');
-                resumeCursor.style.pointerEvents = 'none';
-                resumeCursor.style.opacity = '0';
-            }
+            resumeCursor.classList.remove('active');
+            resumeCursor.classList.add('fading');
+            resumeCursor.style.opacity = '0';
+            document.body.classList.remove('show-resume-cursor');
         }
     }
     
-    // Hide cursor when hovering over buttons and links
-    const buttons = document.querySelectorAll('.btn-primary, .btn-contact, .btn-testimonial, .btn-service, a.btn-primary, a.btn-service, a.btn-contact, button');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function(e) {
-            isHoveringButton = true;
-            resumeCursor.style.opacity = '0';
-            document.body.classList.remove('show-resume-cursor');
-            document.body.style.cursor = 'pointer';
-        });
-        button.addEventListener('mouseleave', function(e) {
-            isHoveringButton = false;
-            document.body.style.cursor = '';
-            checkCursorVisibility();
-        });
-    });
+    // Check if mouse is over navbar
+    function checkNavbarHover(e) {
+        if (!header) return;
+        const headerRect = header.getBoundingClientRect();
+        isOverNavbar = (
+            e.clientY >= headerRect.top &&
+            e.clientY <= headerRect.bottom &&
+            e.clientX >= headerRect.left &&
+            e.clientX <= headerRect.right
+        );
+        checkCursorVisibility();
+    }
+    
+    // Check if mouse is over a button or link
+    function checkButtonHover(e) {
+        const target = e.target;
+        // Check if hovering over buttons, links, or clickable elements
+        isOverButton = (
+            target.tagName === 'A' ||
+            target.tagName === 'BUTTON' ||
+            target.closest('a') !== null ||
+            target.closest('button') !== null ||
+            target.classList.contains('btn-primary') ||
+            target.classList.contains('btn-contact') ||
+            target.classList.contains('btn-service') ||
+            target.classList.contains('btn-testimonial') ||
+            target.classList.contains('nav-link') ||
+            target.closest('.btn-primary') !== null ||
+            target.closest('.btn-contact') !== null ||
+            target.closest('.nav-link') !== null
+        );
+        checkCursorVisibility();
+    }
     
     // Track mouse position
-        document.addEventListener('mousemove', function(e) {
+    document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
-        // Check if hovering over a button using elementFromPoint
-        const elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
-        if (elementUnderCursor) {
-            const isButton = elementUnderCursor.closest('.btn-primary, .btn-contact, .btn-testimonial, .btn-service, button, a[href].btn-primary, a[href].btn-service, a[href].btn-contact');
-            if (isButton && !isHoveringButton) {
-                isHoveringButton = true;
-                resumeCursor.style.opacity = '0';
-                document.body.classList.remove('show-resume-cursor');
-                document.body.style.cursor = 'pointer';
-            } else if (!isButton && isHoveringButton) {
-                isHoveringButton = false;
-                document.body.style.cursor = '';
-                checkCursorVisibility();
-            }
-        }
+        // Check if over navbar
+        checkNavbarHover(e);
         
-        updateCursor();
-        if (!isHoveringButton) {
-            checkCursorVisibility();
-        }
+        // Check if over buttons
+        checkButtonHover(e);
+        
+        // Check visibility on mouse move
+        checkCursorVisibility();
     }, { passive: true });
     
     // Check visibility on scroll
     window.addEventListener('scroll', checkCursorVisibility, { passive: true });
     
+    // Handle mouse enter/leave on header
+    if (header) {
+        header.addEventListener('mouseenter', function() {
+            isOverNavbar = true;
+            checkCursorVisibility();
+        });
+        
+        header.addEventListener('mouseleave', function() {
+            isOverNavbar = false;
+            checkCursorVisibility();
+        });
+    }
+    
+    // Handle mouse enter/leave on buttons and links
+    const buttonsAndLinks = document.querySelectorAll('a, button, .btn-primary, .btn-contact, .btn-service, .btn-testimonial, .nav-link');
+    buttonsAndLinks.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            isOverButton = true;
+            checkCursorVisibility();
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            isOverButton = false;
+            checkCursorVisibility();
+        });
+    });
+    
     // Initial visibility check
-    setTimeout(function() {
-        checkCursorVisibility();
-    }, 200);
+    checkCursorVisibility();
+    
+    // Start cursor animation
+    updateCursor();
     
     // Handle click - placeholder for resume functionality
     resumeCursor.addEventListener('click', function(e) {
         e.preventDefault();
-        e.stopPropagation();
-        console.log('Resume clicked!');
         // TODO: Add resume display functionality here
+        console.log('Resume clicked - functionality to be added');
+        // Example: Could open a modal or PDF viewer here
     });
+    
+    // Make cursor clickable only when active
+    resumeCursor.style.pointerEvents = 'none';
 });
