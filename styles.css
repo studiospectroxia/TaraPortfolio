@@ -53,6 +53,11 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: none; /* Hide default cursor when resume cursor is active */
+}
+
+body.show-resume-cursor {
+    cursor: none;
 }
 
 /* Smooth page transitions */
@@ -1766,3 +1771,70 @@ html {
     }
 }
 
+/* Custom Resume Cursor */
+.resume-cursor {
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+}
+
+.resume-cursor.active {
+    opacity: 1 !important;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.resume-cursor-circle {
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--color-orange);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+}
+
+.resume-cursor:hover .resume-cursor-circle {
+    transform: scale(1.1);
+    border-color: var(--color-orange-dark);
+}
+
+.resume-cursor-text {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: rotateText 10s linear infinite;
+}
+
+@keyframes rotateText {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide cursor on mobile */
+@media (max-width: 768px) {
+    .resume-cursor {
+        display: none;
+    }
+    
+    body.show-resume-cursor {
+        cursor: auto;
+    }
+}

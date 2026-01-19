@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Animate buttons
-    const buttons = document.querySelectorAll('.btn-primary, .btn-contact, .btn-testimonial');
+    const buttons = document.querySelectorAll('.btn-primary, .btn-contact, .btn-testimonial, .btn-service, a.btn-primary, a.btn-service, a.btn-contact, button');
     buttons.forEach((btn, index) => {
         btn.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
     });
@@ -282,3 +282,164 @@ window.addEventListener('load', function() {
     }, 100);
 });
 
+// Custom Resume Cursor - FIXED VERSION
+document.addEventListener('DOMContentLoaded', function() {
+    const resumeCursor = document.getElementById('resumeCursor');
+    if (!resumeCursor) {
+        console.error('Resume cursor not found');
+        return;
+    }
+    console.log('✅ Resume cursor found');
+    
+    const heroSection = document.querySelector('.hero');
+    const servicesSection = document.querySelector('.services');
+    const workSection = document.querySelector('.work');
+    
+    if (!heroSection || !servicesSection) {
+        console.error('Hero or Services section not found');
+        return;
+    }
+    console.log('✅ Sections found - Hero:', heroSection.offsetTop, 'Services:', servicesSection.offsetTop);
+    
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+    let isAnimating = false;
+    let isHoveringButton = false;
+    
+    // Initialize cursor position
+    resumeCursor.style.left = cursorX + 'px';
+    resumeCursor.style.top = cursorY + 'px';
+    resumeCursor.style.transition = 'opacity 0.3s ease';
+    
+    // Update cursor position with smooth following
+    function updateCursor() {
+        if (!isAnimating) {
+            isAnimating = true;
+            requestAnimationFrame(function animate() {
+                const dx = mouseX - cursorX;
+                const dy = mouseY - cursorY;
+                
+                cursorX += dx * 0.15;
+                cursorY += dy * 0.15;
+                
+                resumeCursor.style.left = cursorX + 'px';
+                resumeCursor.style.top = cursorY + 'px';
+                
+                if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    isAnimating = false;
+                }
+            });
+        }
+    }
+    
+    // Check if cursor should be visible based on scroll position
+    function checkCursorVisibility() {
+        if (isHoveringButton) {
+            resumeCursor.style.opacity = '0';
+            document.body.classList.remove('show-resume-cursor');
+            return;
+        }
+        
+        const scrollY = window.scrollY || window.pageYOffset;
+        const heroTop = heroSection.offsetTop;
+        const servicesTop = servicesSection.offsetTop;
+        const servicesBottom = servicesTop + servicesSection.offsetHeight;
+        const workTop = workSection ? workSection.offsetTop : Infinity;
+        
+        // Show cursor from hero section start to services section end
+        // Fade out when approaching work section
+        const shouldShow = scrollY >= heroTop - 50 && scrollY <= servicesBottom + 100;
+        const nearWork = workSection && scrollY >= workTop - 200;
+        
+        if (shouldShow && !nearWork) {
+            if (!resumeCursor.classList.contains('active')) {
+                resumeCursor.classList.add('active');
+                document.body.classList.add('show-resume-cursor');
+                resumeCursor.style.pointerEvents = 'auto';
+                resumeCursor.style.opacity = '1';
+            }
+        } else if (nearWork) {
+            // Fade out when entering work section
+            const fadeProgress = Math.min((scrollY - (workTop - 200)) / 200, 1);
+            resumeCursor.style.opacity = (1 - fadeProgress).toString();
+            if (fadeProgress >= 1) {
+                resumeCursor.classList.remove('active');
+                document.body.classList.remove('show-resume-cursor');
+                resumeCursor.style.pointerEvents = 'none';
+            } else {
+                resumeCursor.classList.add('active');
+                document.body.classList.add('show-resume-cursor');
+            }
+        } else {
+            if (resumeCursor.classList.contains('active')) {
+                resumeCursor.classList.remove('active');
+                document.body.classList.remove('show-resume-cursor');
+                resumeCursor.style.pointerEvents = 'none';
+                resumeCursor.style.opacity = '0';
+            }
+        }
+    }
+    
+    // Hide cursor when hovering over buttons and links
+    const buttons = document.querySelectorAll('.btn-primary, .btn-contact, .btn-testimonial, .btn-service, a.btn-primary, a.btn-service, a.btn-contact, button');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function(e) {
+            isHoveringButton = true;
+            resumeCursor.style.opacity = '0';
+            document.body.classList.remove('show-resume-cursor');
+            document.body.style.cursor = 'pointer';
+        });
+        button.addEventListener('mouseleave', function(e) {
+            isHoveringButton = false;
+            document.body.style.cursor = '';
+            checkCursorVisibility();
+        });
+    });
+    
+    // Track mouse position
+        document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Check if hovering over a button using elementFromPoint
+        const elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
+        if (elementUnderCursor) {
+            const isButton = elementUnderCursor.closest('.btn-primary, .btn-contact, .btn-testimonial, .btn-service, button, a[href].btn-primary, a[href].btn-service, a[href].btn-contact');
+            if (isButton && !isHoveringButton) {
+                isHoveringButton = true;
+                resumeCursor.style.opacity = '0';
+                document.body.classList.remove('show-resume-cursor');
+                document.body.style.cursor = 'pointer';
+            } else if (!isButton && isHoveringButton) {
+                isHoveringButton = false;
+                document.body.style.cursor = '';
+                checkCursorVisibility();
+            }
+        }
+        
+        updateCursor();
+        if (!isHoveringButton) {
+            checkCursorVisibility();
+        }
+    }, { passive: true });
+    
+    // Check visibility on scroll
+    window.addEventListener('scroll', checkCursorVisibility, { passive: true });
+    
+    // Initial visibility check
+    setTimeout(function() {
+        checkCursorVisibility();
+    }, 200);
+    
+    // Handle click - placeholder for resume functionality
+    resumeCursor.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Resume clicked!');
+        // TODO: Add resume display functionality here
+    });
+});
