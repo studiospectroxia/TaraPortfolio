@@ -242,7 +242,7 @@
 
 .leadership-image {
     width: 500px;
-    height: 300px;
+    height: 400px;
     flex-shrink: 0;
     mix-blend-mode: screen;
 }
@@ -452,7 +452,7 @@
         width: 100%;
         max-width: 500px;
         height: auto;
-        aspect-ratio: 500 / 300;
+        aspect-ratio: 500 / 400;
     }
     
     .learning-content {

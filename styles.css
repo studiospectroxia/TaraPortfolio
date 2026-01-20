@@ -56,10 +56,6 @@ body {
     cursor: auto; /* Default cursor */
 }
 
-body.show-resume-cursor {
-    cursor: none;
-}
-
 /* Smooth page transitions */
 html {
     scroll-behavior: smooth;
@@ -435,6 +431,12 @@ html {
     min-width: 300px;
 }
 
+.hero-greeting-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
 .hero-greeting {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
@@ -442,6 +444,7 @@ html {
     color: var(--color-white);
     margin-bottom: var(--spacing-md);
     letter-spacing: -0.02em;
+    display: inline-block;
 }
 
 .hero-name {
@@ -1806,28 +1809,22 @@ a, button, .btn-primary, .btn-contact, .btn-service, .btn-testimonial, .btn-subm
     z-index: 10001;
 }
 
-/* Custom Resume Cursor */
-.resume-cursor {
-    position: fixed;
+/* Resume Button (formerly custom cursor) */
+.resume-button {
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 120px;
     height: 120px;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.1s ease-out;
-    transform: translate(-50%, -50%);
-    will-change: transform;
-}
-
-.resume-cursor.active {
-    opacity: 1 !important;
     pointer-events: auto;
     cursor: pointer;
+    z-index: 10;
+    transform: translate(-60px, -30px);
+    transition: transform 0.3s ease;
 }
 
-.resume-cursor.fading {
-    opacity: 0 !important;
-    pointer-events: none;
+.resume-button:hover {
+    transform: translate(-60px, -30px) scale(1.1);
 }
 
 .resume-cursor-circle {
@@ -1835,18 +1832,19 @@ a, button, .btn-primary, .btn-contact, .btn-service, .btn-testimonial, .btn-subm
     height: 100%;
     border: 2px solid var(--color-orange);
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--color-orange);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
-.resume-cursor:hover .resume-cursor-circle {
-    transform: scale(1.1);
+.resume-button:hover .resume-cursor-circle {
+    transform: scale(1.05);
     border-color: var(--color-orange-dark);
+    background: var(--color-orange-dark);
 }
 
 .resume-cursor-text {
@@ -1855,7 +1853,7 @@ a, button, .btn-primary, .btn-contact, .btn-service, .btn-testimonial, .btn-subm
     position: absolute;
     top: 0;
     left: 0;
-    animation: rotateText 10s linear infinite;
+    animation: rotateText 20s linear infinite;
 }
 
 @keyframes rotateText {
@@ -1867,13 +1865,9 @@ a, button, .btn-primary, .btn-contact, .btn-service, .btn-testimonial, .btn-subm
     }
 }
 
-/* Hide cursor on mobile */
+/* Hide resume button on mobile */
 @media (max-width: 768px) {
-    .resume-cursor {
+    .resume-button {
         display: none;
-    }
-    
-    body.show-resume-cursor {
-        cursor: auto;
     }
 }

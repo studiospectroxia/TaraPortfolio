@@ -57,7 +57,24 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <p class="hero-greeting">Hey!  I am</p>
+                    <div class="hero-greeting-wrapper">
+                        <p class="hero-greeting">Hey!  I am</p>
+                        <!-- Resume Button -->
+                        <div class="resume-cursor resume-button" id="resumeCursor">
+                            <div class="resume-cursor-circle">
+                                <svg class="resume-cursor-text" viewBox="0 0 200 200">
+                                    <defs>
+                                        <path id="circle" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
+                                    </defs>
+                                    <text font-family="Space Grotesk" font-weight="700" font-size="30" fill="#000000">
+                                        <textPath href="#circle" startOffset="0%">
+                                            SHOW RESUME • SHOW RESUME • SHOW RESUME • SHOW RESUME •
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                     <h1 class="hero-name">TARA ANAND</h1>
                     <p class="hero-tagline">Bringing clarity to chaos and creativity to the ordinary</p>
                 </div>
@@ -352,22 +369,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Custom Resume Cursor -->
-    <div class="resume-cursor" id="resumeCursor">
-        <div class="resume-cursor-circle">
-            <svg class="resume-cursor-text" viewBox="0 0 200 200">
-                <defs>
-                    <path id="circle" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
-                </defs>
-                <text font-family="Space Grotesk" font-weight="700" font-size="24" fill="#ff6a00">
-                    <textPath href="#circle" startOffset="0%">
-                        SHOW RESUME • SHOW RESUME • SHOW RESUME • SHOW RESUME •
-                    </textPath>
-                </text>
-            </svg>
-        </div>
-    </div>
 
     <script src="script.js"></script>
     <script src="work-images.js"></script>
