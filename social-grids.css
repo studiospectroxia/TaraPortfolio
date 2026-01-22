@@ -532,6 +532,16 @@
     .social-grids-title {
         font-size: 32px;
     }
+}
+
+@media (max-width: 640px) {
+    .social-grids-title {
+        font-size: 28px;
+    }
+    
+    .social-grids-header {
+        gap: var(--spacing-md);
+    }
     
     .lightbox-close {
         top: 20px;
@@ -567,7 +577,11 @@
     }
     
     .social-grids-title {
-        font-size: 24px;
+        font-size: 28px;
+    }
+    
+    .social-grids-header {
+        gap: var(--spacing-md);
     }
     
     .brand-expansion-grid {
@@ -598,12 +612,10 @@
         font-size: var(--font-size-base);
         padding: 12px 20px;
     }
-        padding: 8px;
-        border-radius: 28px;
-    }
     
     .phone-screen {
-        border-radius: 22px;
+        padding: 8px;
+        border-radius: 28px;
     }
     
     .phone-screen::before {
@@ -611,12 +623,6 @@
         height: 18px;
         border-radius: 0 0 14px 14px;
     }
-    
-    .social-grids-title {
-        font-size: 28px;
-    }
-    
-    .social-grids-header {
         gap: var(--spacing-md);
     }
     

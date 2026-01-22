@@ -257,6 +257,12 @@
     .pitch-decks-header {
         gap: var(--spacing-md);
     }
+}
+
+@media (max-width: 480px) {
+    .pitch-decks-title {
+        font-size: 24px;
+    }
     
     .pitch-deck-card {
         padding: var(--spacing-md);

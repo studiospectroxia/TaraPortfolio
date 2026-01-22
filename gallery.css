@@ -299,3 +299,9 @@
     }
 }
 
+@media (max-width: 480px) {
+    .gallery-title {
+        font-size: 24px;
+    }
+}
+
