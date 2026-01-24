@@ -298,20 +298,19 @@
 
 .learning-content {
     display: flex;
+    flex-direction: column;
     gap: var(--spacing-3xl);
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
     width: 100%;
 }
 
-.learning-left {
-    flex: 1;
-    max-width: 600px;
-    min-width: 350px;
+.learning-text-centered {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
 }
 
 .learning-highlight {
@@ -322,16 +321,156 @@
     text-transform: uppercase;
 }
 
-.learning-image {
-    width: 400px;
-    height: 550px;
-    flex-shrink: 0;
+/* Clothing Gallery */
+.clothing-gallery {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-2xl) 0;
 }
 
-.learning-image img {
+.clothing-images-center {
+    display: flex;
+    gap: var(--spacing-xl);
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.clothing-image-wrapper {
+    width: 300px;
+    height: 400px;
+    flex-shrink: 0;
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.clothing-image-wrapper:nth-child(2) {
+    transform: rotate(3deg);
+}
+
+.clothing-image-wrapper:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 3;
+}
+
+.clothing-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.review-carousel-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.review-carousel {
+    width: 100%;
+    overflow: visible;
+    position: relative;
+    padding: var(--spacing-xl) 0;
+}
+
+.review-carousel-track {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-lg);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.review-image {
+    width: 280px;
+    max-width: 280px;
+    height: auto;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.review-image::after {
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.review-image.prev {
+    transform: rotate(-8deg) scale(0.85);
+    z-index: 1;
+}
+
+.review-image.prev::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.review-image.active {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    z-index: 3;
+    width: 350px;
+    max-width: 350px;
+}
+
+.review-image.next {
+    transform: rotate(8deg) scale(0.85);
+    z-index: 1;
+}
+
+.review-image.next::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.review-image.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.review-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.learning-highlight-centered {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 
@@ -460,11 +599,31 @@
         gap: var(--spacing-xl);
     }
     
-    .learning-image {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-        aspect-ratio: 400 / 550;
+    .learning-text-centered {
+        max-width: 100%;
+    }
+    
+    .clothing-images-center {
+        gap: var(--spacing-lg);
+    }
+    
+    .clothing-image-wrapper {
+        width: 250px;
+        height: 330px;
+    }
+    
+    .review-carousel-container {
+        max-width: 700px;
+    }
+    
+    .review-image {
+        width: 220px;
+        max-width: 220px;
+    }
+    
+    .review-image.active {
+        width: 280px;
+        max-width: 280px;
     }
     
     .carousel-image {
@@ -530,6 +689,71 @@
     
     .learning-highlight {
         font-size: 26px;
+    }
+    
+    .clothing-gallery {
+        gap: var(--spacing-xl);
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .clothing-images-center {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .clothing-image-wrapper {
+        width: 200px;
+        height: 270px;
+        transform: rotate(-2deg);
+    }
+    
+    .clothing-image-wrapper:nth-child(2) {
+        transform: rotate(2deg);
+    }
+    
+    .review-carousel-container {
+        max-width: 100%;
+        padding: 0 var(--spacing-md);
+    }
+    
+    .review-carousel {
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .review-image {
+        width: 150px;
+        max-width: 150px;
+    }
+    
+    .review-image.active {
+        width: 200px;
+        max-width: 200px;
+    }
+    
+    .review-image.prev,
+    .review-image.next {
+        transform: rotate(0deg) scale(0.7);
+    }
+    
+    .review-image.prev {
+        transform: rotate(-5deg) scale(0.7);
+    }
+    
+    .review-image.next {
+        transform: rotate(5deg) scale(0.7);
+    }
+    
+    .review-image.prev::after,
+    .review-image.next::after {
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .review-image img {
+        max-width: 100%;
+    }
+    
+    .learning-highlight-centered {
+        padding: 0 var(--spacing-md);
     }
     
     .sweet-spot-image {
