@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'LOR\'s/RecommendationLetter_TaraAnand.pdf', // Ishita Aggarwal - AGENC
         'LOR\'s/Tara Anand - LR.pdf' // Ishita Aggarwal - LR
     ];
+    // Resume file path
+    const resumeFile = 'Resume/Resume.pdf';
     
     // Function to encode file path properly
     function encodeLORPath(path) {
@@ -45,6 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Opening LOR:', encodedPath);
         }
     }
+
+    // Open Resume in lightbox
+    function openResume() {
+        const encodedPath = encodeLORPath(resumeFile);
+        iframe.src = encodedPath;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        console.log('Opening Resume:', encodedPath);
+    }
     
     // Close lightbox
     function closeLOR() {
@@ -71,6 +82,15 @@ document.addEventListener('DOMContentLoaded', function() {
             openLOR(lorIndex);
         });
     });
+
+    // Attach click handler to Resume button on hero section
+    const resumeButton = document.getElementById('resumeCursor');
+    if (resumeButton) {
+        resumeButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            openResume();
+        });
+    }
     
     // Close on button/overlay click
     closeBtn.addEventListener('click', closeLOR);
