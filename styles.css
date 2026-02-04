@@ -59,6 +59,17 @@ body {
 /* Smooth page transitions */
 html {
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Ensure media never overflows horizontally */
+img,
+video,
+iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Animation keyframes */
@@ -800,6 +811,15 @@ html {
 
 .brands-logo-container:hover .brands-logo-image {
     opacity: 1;
+}
+
+/* Tighter logo sizing on tablets and mobile to avoid horizontal overflow */
+@media (max-width: 768px) {
+    .brands-logo-image {
+        width: 100%;
+        max-width: 100%;
+        min-height: auto;
+    }
 }
 
 /* Services Section */
