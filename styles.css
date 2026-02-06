@@ -469,6 +469,17 @@ iframe {
     letter-spacing: -0.03em;
 }
 
+.hero-name-alt {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: var(--font-size-lg);
+    color: var(--color-orange-dark);
+    text-transform: none;
+    letter-spacing: 0.04em;
+    margin-top: -10px;
+    margin-bottom: var(--spacing-md);
+}
+
 .hero-tagline {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 500;
